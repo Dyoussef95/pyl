@@ -28,6 +28,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $attributes = [
+        'habilitado' => true,
+    ];
     /**
      * The attributes that should be cast to native types.
      *
