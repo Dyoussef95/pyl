@@ -28,7 +28,7 @@ class TrabajoController extends Controller
     {
         $url=$request->url;
         $trabajo = new Trabajo;
-        $trabajo->nombre=$request->input('nombre');
+        $trabajo->nombre=strtoupper($request->input('nombre'));
         $trabajo->habilitado=true;
         $trabajo->save();
         //Trabajo::create($request->all());
@@ -42,7 +42,7 @@ class TrabajoController extends Controller
     public function update(Trabajo $trabajo)
     {
         $url=request()->url;
-       $trabajo->nombre=request()->nombre;
+       $trabajo->nombre=strtoupper(request()->nombre);
        $trabajo->save();
        return redirect($url);
     }

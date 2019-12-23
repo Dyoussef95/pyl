@@ -19,7 +19,7 @@
          @foreach($juzgadosespecificos as $juzgadoespecifico)
             <tr>
                <td>{!! $juzgadoespecifico->nombre !!}</td>
-               <td><span class="label label-success">{!! $juzgadoespecifico->juzgadoTipo->nombre !!}</span></td>
+               <td>{!! $juzgadoespecifico->juzgadoTipo->nombre !!}</td>
                <td>
                   <a href="juzgadosespecificos/{{ $juzgadoespecifico->id }}/edit" class="btn btn-success btn-sm">Editar</a>
                </td>

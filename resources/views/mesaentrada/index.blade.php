@@ -14,7 +14,8 @@
          <tr>
             <th>Legajo</th>  
             <th>Apellidos</th>
-            <th>Nombres</th>                           
+            <th>Nombres</th>
+            <th>Profesional</th>
             <th scope="col"></th>
             <th scope="col"></th>
          </tr>
@@ -25,11 +26,24 @@
             <td>{!! $interno->legajo !!}</td>
             <td>{!! $interno->apellido !!}</td>
             <td>{!! $interno->nombre !!}</td>
+         
+            <td>{!! $interno->historia()->first()->empleado()->first()->apellido !!} {!! $interno->historia()->first()->empleado()->first()->nombre !!}</td>
+            
             <td>
-               <a class="btn btn-success btn-sm m-0">Editar</a>
+               <a href="mesa-entrada/{{$interno->historia()->first()->id}}/edit" class="btn btn-success btn-sm m-0">Editar</a>
             </td>
+            
             <td>                        
-                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+            <form action="/mesa-entrada/{{ $interno->id}}" method="POST">
+                  @method('DELETE')
+                  @csrf
+                  
+                  <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                  
+                  <div class="form-group">
+                     <input type="hidden" name="url" class="form-control" id="" value={{URL::current()}}>
+                  </div>
+               </form>
             </td>
          </tr>
          @endforeach

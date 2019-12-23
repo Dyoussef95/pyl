@@ -27,7 +27,7 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $area = new Area;
-        $area->nombre=$request->input('nombre');
+        $area->nombre=strtoupper($request->input('nombre'));
         $area->habilitado=true;
         $area->save();
         //Area::create($request->all());
@@ -41,7 +41,7 @@ class AreaController extends Controller
 
     public function update(Area $area)
     {
-       $area->nombre=request()->nombre;
+       $area->nombre=strtoupper(request()->nombre);
        $area->save();
        return redirect('areas');
     }

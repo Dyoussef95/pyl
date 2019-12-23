@@ -8,7 +8,6 @@
     
     <form action="/departamentos/{{$departamento->id}}" method="POST" role="form">
         @method('PUT')
-        @csrf
         <legend>Editar departamento</legend>
 
         @include('departamentos._form')

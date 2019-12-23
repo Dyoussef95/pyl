@@ -23,4 +23,8 @@ class Consumo extends Model
     private $rules = [
         'objeto_consumo' => 'required',
     ];
+
+    public function situaciones_salud_consumos(){
+        return $this->belongsToMany(SituacionSalud::class,'situaciones_salud_consumos','consumo_id','situacion_salud_id');
+    }
 }

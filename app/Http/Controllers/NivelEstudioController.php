@@ -11,7 +11,7 @@ class NivelEstudioController extends Controller
     public function index()
     {
         $nivelestudios = NivelEstudio :: orderBy('nombre','asc')->get();
-        return view('nivelestudio.index')->with('nivelestudios', $nivelestudios);
+        return view('nivelestudio.index',compact('nivelestudios'));
     }
 
     public function show(NivelEstudio $nivelestudio)
@@ -36,7 +36,7 @@ class NivelEstudioController extends Controller
 
     public function edit(NivelEstudio $nivelestudio){
         
-        return view('nivelestudio.edit')->with('nivelestudio',$nivelestudio);
+        return view('nivelestudio.edit',compact('nivelestudio'));
     }
 
     public function update(NivelEstudio $nivelestudio)

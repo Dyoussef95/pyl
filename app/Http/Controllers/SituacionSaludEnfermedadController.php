@@ -34,6 +34,9 @@ class SituacionSaludEnfermedadController extends Controller
     public function store(Request $request)
     {
         $url=$request->input('url');
+        $request->validate([
+            'enfermedad_id' => ['required'],
+        ]);
         SituacionSaludEnfermedad::create($request->all());
         return redirect($url);
     }
@@ -59,7 +62,7 @@ class SituacionSaludEnfermedadController extends Controller
 
     public function destroy(SituacionSaludEnfermedad $situacionsaludenfermedad)
     {
-        //dd($situacionsaludenfermedad->situacion_salud_id);
+        dd($situacionsaludenfermedad);
         $url="situacionsaluds/$situacionsaludenfermedad->situacion_salud_id/edit";
         $situacionsaludenfermedad->delete();
 

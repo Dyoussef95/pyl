@@ -6,7 +6,7 @@
 
 @section('content')
     
-    <form action="/historias/{{$historia->id}}" method="POST" role="form">
+    <form action="/historias/{{$historia->id}}" method="POST" role="form" id="form">
         @method('PATCH')
         @csrf
         <legend>Editar historia</legend>

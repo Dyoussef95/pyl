@@ -11,12 +11,12 @@ class FrecuenciaControlController extends Controller
     public function index()
     {
         $frecuenciascontroles = FrecuenciaControl :: orderBy('nombre','asc')->get();
-        return view('frecuenciascontroles.index')->with('frecuenciascontroles', $frecuenciascontroles);
+        return view('frecuenciascontroles.index',compact('frecuenciascontroles'));
     }
 
     public function show(FrecuenciaControl $frecuenciacontrol)
     {
-     return view('frecuenciascontroles.show',['frecuenciacontrol'=>$frecuenciacontrol]);
+     return view('frecuenciascontroles.show',compact('frecuenciacontrol'));
     }
 
     public function create()
@@ -26,24 +26,24 @@ class FrecuenciaControlController extends Controller
 
     public function store(Request $request)
     {
+        $url = $request->url;
         $frecuenciacontrol = new FrecuenciaControl;
-        $frecuenciacontrol->nombre=$request->input('nombre');
-        $frecuenciacontrol->habilitado=true;
+        $frecuenciacontrol->nombre=strtoupper($request->nombre);
         $frecuenciacontrol->save();
-        //FrecuenciaControl::create($request->all());
-        return redirect('frecuenciascontroles');
+        return redirect($url);
     }
 
     public function edit(FrecuenciaControl $frecuenciacontrol){
         
-        return view('frecuenciascontroles.edit')->with('frecuenciacontrol',$frecuenciacontrol);
+        return view('frecuenciascontroles.edit',compact('frecuenciacontrol'));
     }
 
-    public function update(FrecuenciaControl $frecuenciacontrol)
+    public function update(Request $request, FrecuenciaControl $frecuenciacontrol)
     {
-       $frecuenciacontrol->nombre=request()->nombre;
+        $url = $request->url;
+       $frecuenciacontrol->nombre=strtoupper($request->nombre);
        $frecuenciacontrol->save();
-       return redirect('frecuenciascontroles');
+       return redirect($url);
     }
 
     public function destroy(FrecuenciaControl $frecuenciacontrol)

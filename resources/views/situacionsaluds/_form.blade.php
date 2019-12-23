@@ -1,3 +1,4 @@
+@csrf
 <div class="form-group needs-validation">
     <label for="">Tiene cobertura medica?</label>
     <br>

@@ -1,31 +1,10 @@
 <div class="form-group">
     <label for="">Fecha Inicio</label>
-<input required type="date" name="fechaInicio" value="{{ isset($historia) ? $historia->fechaInicio : '' }}" class="form-control" id="" placeholder="dd/mm/aaaa">
+<input required type="date" name="fechaInicio" value="{{ isset($historia) ? $historia->fecha_inicio : '' }}" style="width:400px;" class="form-control" id="" placeholder="dd/mm/aaaa">
 </div>
-
-@if(isset($interno))
-    <div class="form-group">
-    <input type="hidden" name="internos_id" class="form-control" id="" value="{{$interno->id}}">
- </div>
-@else
-    <div class="form-group">
-    <select name="internos_id" form="form" class="select2" style="width:400px;">
-        @foreach ($internos as $interno)
-            <option value={{ $interno->id }}
-                @if(isset($historia))
-                    {{$historia->interno->legajo==$interno->legajo ? 'selected' : ''}}
-                @endif
-            >
-            {{ $interno->legajo }}</option>
-        @endforeach
-    </select>
-</div>
-@endif
-
-
-
 
 <div class="form-group">
+<label for="">Seleccione el regimen:</label><br>
     <select name="regimen_id" form="form" class="select2" style="width:400px;">
         @foreach ($regimenes as $regimen)
             <option value={{ $regimen->id }}
@@ -39,6 +18,7 @@
 </div>
 
 <div class="form-group">
+<label for="">Seleccione el delito:</label><br>
     <select name="delito_especifico_id" form="form" class="select2" style="width:400px;">
         @foreach ($delitoespecificos as $delitoespecifico)
             <option value={{ $delitoespecifico->id }}
@@ -52,6 +32,7 @@
 </div>
 
 <div class="form-group">
+<label for="">Seleccione la situacion procesal:</label><br>
     <select name="situacion_procesal_id" form="form" class="select2" style="width:400px;">
         @foreach ($situacionprocesales as $situacionprocesal)
             <option value={{ $situacionprocesal->id }}
@@ -65,11 +46,12 @@
 </div>
 
 <div class="form-group">
+<label for="">Seleccione el motivo de ingreso al programa:</label><br>
     <select name="motivos_de_ingreso_programa_id" form="form" class="select2" style="width:400px;">
         @foreach ($motivosdeingresoalprograma as $motivodeingresoalprograma)
             <option value={{ $motivodeingresoalprograma->id }}
                 @if(isset($historia))
-                    {{$historia->motivos_ingreso->id==$motivodeingresoalprograma->id ? 'selected' : ''}}
+                    {{$historia->motivo_ingreso->id==$motivodeingresoalprograma->id ? 'selected' : ''}}
                 @endif
             >
             {{ $motivodeingresoalprograma->nombre }}</option>
@@ -78,10 +60,11 @@
 </div>
 
 <div class="form-group">
+<label for="">Seleccione la frecuencia de control:</label><br>
     <select name="frecuencia_id" form="form" class="select2" style="width:400px;">
         @foreach ($frecuenciacontroles as $frecuenciacontrol)
             <option value={{ $frecuenciacontrol->id }}
-                @if(isset($historia))
+                @if(isset($historia->frecuencia->id))
                     {{$historia->frecuencia->id==$frecuenciacontrol->id ? 'selected' : ''}}
                 @endif
             >
@@ -91,6 +74,7 @@
 </div>
 
 <div class="form-group">
+<label for="">Seleccione la procedencia:</label><br>
     <select name="juzgado_especifico_id" form="form" class="select2" style="width:400px;">
         @foreach ($juzgadoespecificos as $juzgadoespecifico)
             <option value={{ $juzgadoespecifico->id }}

@@ -52,7 +52,7 @@
                         <img class="img-responsive img-rounded" src="../../img/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name"><strong>{{ Auth::user()->name }}</strong>
+                        <span class="user-name"><strong>{{ Auth::user()->empleado->nombre }}</strong><strong> {{ Auth::user()->empleado->apellido }}</strong>
                         </span>
                         <span class="user-role">Directora</span>
                         <span class="user-status">
@@ -89,7 +89,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">Usuarios
+                                        <a href="/usuarios">Usuarios
                                             <!--<span class="badge badge-pill badge-success">Pro</span>-->
                                         </a>
                                     </li>
@@ -125,15 +125,13 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fas fa-home"></i>
-                                <span class="menu-text">Arresto Domiciliario</span>
+                                <span class="menu-text">Medio Libre</span>
                                 <!--<span class="badge badge-pill badge-danger">3</span>-->
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">...
-
-                                        </a>
+                                        <a href="/internos">Asistidos</a>
                                     </li>
                                     <li>
                                         <a href="#">...</a>
@@ -147,12 +145,12 @@
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fas fa-door-open"></i>
-                                <span class="menu-text">Medio Libre</span>
+                                <span class="menu-text">Arresto Domiciliario</span>
                             </a>
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="#">....</a>
+                                        <a href="/internos">Asistidos</a>
                                     </li>
                                     <li>
                                         <a href="#">....</a>

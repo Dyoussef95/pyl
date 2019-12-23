@@ -131,7 +131,10 @@ Route::get('/historias/create/{interno}','HistoriaController@create');
 
 Route::get('/mesa-entrada','HistoriaController@indexMesaEntrada');
 Route::get('/mesa-entrada/create','HistoriaController@createMesaEntrada');
+Route::get('/mesa-entrada/{interno}/edit','HistoriaController@editMesaEntrada');
+Route::put('/mesa-entrada/{historia}'.'HistoriaController@update');
 Route::post('/ingreso-nuevo','HistoriaController@storeMesaEntrada');
+Route::delete('/mesa-entrada/{interno}','InternoController@destroy');
 
 Route::resource('/enfermedads','EnfermedadController');
 
@@ -150,7 +153,20 @@ Route::get('/situacionsaluds/{situacionsalud}/edit','SituacionSaludController@ed
 Route::put('/situacionsaluds/{situacionsalud}','SituacionSaludController@update'); 
 Route::post('/situacionsaluds','SituacionSaludController@store');
 Route::delete('/situacionsaluds/{situacionsalud}','SituacionSaludController@destroy');
+
+Route::get('/situacionsalud/createEnfermedad/{situacionSalud}','SituacionSaludController@createEnfermedad');
+Route::get('/situacionsalud/enfermedad/{situacionsalud}/{enfermedad}/edit','SituacionSaludController@editEnfermedad');
+Route::put('/situacionsalud/enfermedad/{situacionsalud}/{enfermedad}','SituacionSaludController@updateEnfermedad');
+Route::post('/situacionsalud/enfermedad/{situacionSalud}','SituacionSaludController@storeEnfermedad');
+Route::delete('/situacionsalud/enfermedad/{situacionsalud}/{enfermedad}','SituacionSaludController@destroyEnfermedad');
+
+Route::get('/situacionsalud/createConsumo/{situacionSalud}','SituacionSaludController@createConsumo');
+Route::get('/situacionsalud/consumo/{situacionsalud}/{consumo}/edit','SituacionSaludController@editConsumo');
+Route::put('/situacionsalud/consumo/{situacionsalud}/{consumo}','SituacionSaludController@updateConsumo');
+Route::post('/situacionsalud/consumo/{situacionSalud}','SituacionSaludController@storeConsumo');
+Route::delete('/situacionsalud/consumo/{situacionsalud}/{consumo}','SituacionSaludController@destroyConsumo');
 //Route::resource('/situacionsaluds','SituacionSaludController');
+
 
 Route::get('/situacionsaludenfermedads','SituacionSaludEnfermedadController@index');
 Route::get('/situacionsaludenfermedads/create/{situacionsalud}','SituacionSaludEnfermedadController@create');
@@ -169,6 +185,14 @@ Route::resource('/cumplimientos','CumplimientoController');
 
 Route::resource('/tipomotivoingresoprogramas','TipoMotivoIngresoProgramaController');
 
+Route::resource('/nacionalidades','NacionalidadController')->parameters([
+    'nacionalidades' => 'nacionalidad'
+]);;
+
+Route::resource('/tipostratamientosconsumos','TipoTratamientoConsumoController')->parameters([
+    'tipostratamientosconsumos' => 'tipotratamientoconsumos'
+]);;
+
 Route::get('/', 'PatronatoController@index');
 
 Route::get('asistidos', function() {
@@ -179,9 +203,8 @@ Route::get('personal', function() {
 	return view('personal.personalIndex');
 });
 
-Route::get('/usuarios', 'UsuarioController@index');
-Route::get('/usuarios/crear', 'UsuarioController@create');
-Route::post('/usuarios', 'UsuarioController@store');
+Route::resource('/usuarios','UsuarioController');
+
 
 Route::get('/prision', function () {
     return view('PrisionDomiciliaria.Index');
@@ -197,6 +220,7 @@ Route::get('/parametros','ParametersController@index');
 Route::get('ruben', function() {
 	return view('prueba');
 });
+
 
 Auth::routes();
 

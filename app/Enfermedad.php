@@ -23,4 +23,8 @@ class Enfermedad extends Model
     private $rules = [
         'nombre' => 'required',
     ];
+
+    public function situaciones_salud_enfermedades(){
+        return $this->belongsToMany(SituacionSalud::class,'situaciones_salud_enfermedades','enfermedad_id','situacion_salud_id');
+    }
 }

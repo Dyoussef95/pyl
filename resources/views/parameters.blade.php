@@ -37,6 +37,12 @@
     <a class="nav-link {{Request::is('lugartratamientoconsumos') ? 'active' : ''}}" id="lugartratamientoconsumos-tab"  href="lugartratamientoconsumos" role="tab" aria-controls="lugartratamientoconsumos" aria-selected="false">Lugares de Tratamiento de Consumos</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link {{Request::is('tipostratamientosconsumos') ? 'active' : ''}}" id="tipostratamientosconsumos-tab"  href="tipostratamientosconsumos" role="tab" aria-controls="tipostratamientosconsumos" aria-selected="false">Tipos de Tratamientos de Consumos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{Request::is('nacionalidades') ? 'active' : ''}}" id="nacionalidades-tab"  href="nacionalidades" role="tab" aria-controls="nacionalidades" aria-selected="false">Nacionalidades</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link {{Request::is('departamentos') ? 'active' : ''}}" id="departamentos-tab"  href="departamentos" role="tab" aria-controls="departamentos" aria-selected="false">Departamentos</a>
   </li>
   <li class="nav-item">
@@ -44,6 +50,9 @@
   </li>
   <li class="nav-item">
     <a class="nav-link {{Request::is('areas') ? 'active' : ''}}" id="areas-tab"  href="areas" role="tab" aria-controls="areas" aria-selected="false">Areas</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{Request::is('regimen') ? 'active' : ''}}" id="regimenes-tab"  href="regimen" role="tab" aria-controls="regimenes" aria-selected="false">Regimenes</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{Request::is('situacionesprocesales') ? 'active' : ''}}" id="situacionesprocesales-tab"  href="situacionesprocesales" role="tab" aria-controls="situacionesprocesales" aria-selected="false">Situaciones Procesales</a>
@@ -68,6 +77,9 @@
   </li>
   <li class="nav-item">
     <a class="nav-link {{Request::is('motivosdelingresoalprograma') ? 'active' : ''}}" id="motivosdelingresoalprograma-tab"  href="motivosdelingresoalprograma" role="tab" aria-controls="motivosdelingresoalprograma" aria-selected="false">Motivos de Ingreso al Programa</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{Request::is('frecuenciascontroles') ? 'active' : ''}}" id="frecuenciascontroles-tab"  href="frecuenciascontroles" role="tab" aria-controls="frecuenciascontroles" aria-selected="false">Frecuencias de Control</a>
   </li>
 </ul>
 <br>

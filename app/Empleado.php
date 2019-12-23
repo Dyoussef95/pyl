@@ -24,4 +24,12 @@ class Empleado extends Model
         'nombre' => 'required',
         'apellido' => 'required',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function historia(){
+        return $this->belongsToMany(Historia::class,'empleados_historias');
+    }
 }

@@ -1,4 +1,5 @@
 
+    @csrf
     <div class="form-group">
             <input type="hidden" name="situacion_salud_id" class="form-control" id="" value={{ isset($situacionsaludenfermedad) ? $situacionsaludenfermedad->situacion_salud_id : $situacionsalud->id}}>
     </div>

@@ -28,8 +28,13 @@ class RegimenController extends Controller
 
     public function store(Request $request)
     {
-        //dd(request()->all());
-        Regimen::create(request()->all());
+        
+        $regimen = new Regimen;
+        $regimen->nombre=strtoupper($request->nombre);
+        $regimen->area_id=$request->area_id;
+        $regimen->habilitado=true;
+        $regimen->save();
+
         return redirect('regimen');
     }
 

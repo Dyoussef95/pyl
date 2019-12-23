@@ -42,8 +42,21 @@
 </div>
 
 <div class="form-group">
-    <label for="">Edad</label>
-<input type="number" name="telefono" value="{{ isset($interno) ? $interno->telefono : '' }}" class="form-control" id="" placeholder="Ingrese la telefono">
+    <label for="">Nacionalidad</label>
+    <select name="nacionalidad_id" form="form" class="select2" style="width:400px;">            
+        @foreach ($nacionalidades as $nacionalidad)
+           <option value={{ $nacionalidad->id }}>{{ $nacionalidad->nombre }}</option>
+        @endforeach            
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="">Localidad</label>
+    <select name="localidad_id" form="form" class="select2" style="width:400px;">            
+        @foreach ($localidades as $localidad)
+           <option value={{ $localidad->id }}>{{ $localidad->nombre }}</option>
+        @endforeach            
+    </select>
 </div>
 
 <div class="form-group">
@@ -110,15 +123,6 @@
                 @endforeach            
         </select>
         <i class="fas fa-plus-circle" onclick="location.href='../trabajos/create'" style="cursor: pointer;"></i>
-</div>
-
-<div class="form-group">
-        <label for="">Localidad</label>
-        <select name="localidad_id" form="form" class="select2" style="width:400px;">            
-                @foreach ($localidades as $localidad)
-                    <option value={{ $localidad->id }}>{{ $localidad->nombre }}</option>
-                @endforeach            
-        </select>
 </div>
 
 <div class="form-group">

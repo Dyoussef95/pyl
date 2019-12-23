@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\MotivosDeIngresoAlPrograma;
+use App\MotivoIngresoPrograma;
 use App\TipoMotivoIngresoPrograma;
 
 class MotivosDelIngresoAlProgramaController extends Controller
@@ -11,7 +11,7 @@ class MotivosDelIngresoAlProgramaController extends Controller
 
     public function index()
     {
-        $motivosdelingresoalprogramas = MotivosDeIngresoAlPrograma :: orderBy('nombre','asc')->get();
+        $motivosdelingresoalprogramas = MotivoIngresoPrograma :: orderBy('nombre','asc')->get();
         return view('motivosdelingresoalprograma.index')->with('motivosdelingresoalprogramas', $motivosdelingresoalprogramas);
     }
 
@@ -28,7 +28,7 @@ class MotivosDelIngresoAlProgramaController extends Controller
 
     public function store(Request $request)
     {
-        $motivosdelingresoalprograma = new MotivosDeIngresoAlPrograma;
+        $motivosdelingresoalprograma = new MotivoIngresoPrograma;
         $motivosdelingresoalprograma->nombre=strtoupper($request->input('nombre'));
         $motivosdelingresoalprograma->tipo_motivo_ingreso_programa_id=$request->tipo_motivo_ingreso_programa_id;
         $motivosdelingresoalprograma->habilitado=true;

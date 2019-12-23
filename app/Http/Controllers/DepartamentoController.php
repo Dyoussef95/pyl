@@ -11,12 +11,12 @@ class DepartamentoController extends Controller
     public function index()
     {
         $departamentos = Departamento :: orderBy('nombre','asc')->get();
-        return view('departamentos.index')->with('departamentos', $departamentos);
+        return view('departamentos.index',compact('departamentos'));
     }
 
     public function show(Departamento $departamento)
     {
-     return view('departamentos.show',['departamento'=>$departamento]);
+     return view('departamentos.show',compact('departamento'));
     }
 
     public function create()
@@ -25,25 +25,28 @@ class DepartamentoController extends Controller
     }
 
     public function store(Request $request)
-    {
+    { 
+        $url = $request->url;
         $departamento = new Departamento;
-        $departamento->nombre=$request->input('nombre');
-        $departamento->habilitado=true;
+        $departamento->nombre=strtoupper($request->nombre);
+       
         $departamento->save();
+
         //Departamento::create($request->all());
-        return redirect('departamentos');
+        return redirect($url);
     }
 
     public function edit(Departamento $departamento){
         
-        return view('departamentos.edit')->with('departamento',$departamento);
+        return view('departamentos.edit',compact('departamento'));
     }
 
-    public function update(Departamento $departamento)
+    public function update(Request $request,Departamento $departamento)
     {
-       $departamento->nombre=request()->nombre;
+        $url=$request->url;
+       $departamento->nombre=strtoupper($request->nombre);
        $departamento->save();
-       return redirect('departamentos');
+       return redirect($url);
     }
 
     public function destroy(Departamento $departamento)

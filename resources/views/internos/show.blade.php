@@ -14,6 +14,7 @@
                   Genero: {{isset($interno->sexo) ? $interno->sexo->nombre : 'SIN INFORMACION'}} <br> 
                   DNI: {!! isset($interno->numero_documento) ? $interno->numero_documento : 'SIN INFORMACION' !!} <br>
                   Domicilio Declarado: {{isset($interno->domicilioDeclarado) ? $interno->domicilioDeclarado : 'SIN INFORMACION'}} <br>
+                  Nacionalidad: {!! isset($interno->nacionalidad) ? $interno->nacionalidad->nombre : 'SIN INFORMACION' !!} <br>
                   Localidad: {!! isset($interno->localidad) ? $interno->localidad->nombre : 'SIN INFORMACION' !!} <br>
                   Estado Civil: {{ isset($interno->estado_civil) ? $interno->estado_civil->nombre : 'SIN INFORMACION'}} <br>
                   Fecha de Nacimiento: {{ isset($interno->fecha_nacimiento) ? $interno->fecha_nacimiento : 'SIN INFORMACION'}} <br>
@@ -30,20 +31,21 @@
                      <br>
                      <a href="../historias/create/{{$interno->id}}"  class="btn btn-success btn-sm m-0">Ingresar Datos</a> 
                @else
-               <a href="../historias/{{ $interno->historia->id }}/edit" class="btn btn-success btn-sm">Editar</a>
-             
-               <br><br>
-              <!-- Legajo: {!!$interno->legajo!!} <br>
-               Area: {{$historia->regimen->area->nombre}} <br>
-               Regimen: {{$historia->regimen->nombre}} <br>
-               Fecha de Ingreso: {{$historia->fechaInicio}} <br>
-               Tipo Delito: {{$historia->delito_especifico->tipos_delitos->nombre}} <br>
-               Delito Especifico: {{$historia->delito_especifico->nombre}} <br> <br>
-               MOTIVO DE INGRESO AL PROGRAMA: {{$historia->motivos_ingreso->nombre}} <br> <br>
-               Situacion Procesal: {{$historia->situacion_procesal->nombre}} <br>
-               Frecuencia de Control: {{$historia->frecuencia->nombre}} <br>-->
                
              
+               
+               Legajo: {!!$interno->legajo!!} <br>
+               Area: {{$historia->regimen->area->nombre}} <br>
+               Regimen: {{$historia->regimen->nombre}} <br>
+               Fecha de Ingreso: {{$historia->fecha_inicio}} <br>
+               Tipo Delito: {{isset($historia->delito_especifico->tipo_delito->nombre) ? $historia->delito_especifico->tipo_delito->nombre : 'SIN INFORMACION'}} <br>
+               Delito Especifico: {{isset($historia->delito_especifico->nombre) ? $historia->delito_especifico->nombre : 'SIN INFORMACION'}} <br>
+               Motivo de Ingreso al Programa: {{$historia->motivo_ingreso->nombre}} <br>
+               Situacion Procesal: {{isset($historia->situacion_procesal->nombre) ? $historia->situacion_procesal->nombre : 'SIN INFORMACION'}}<br>
+               Frecuencia de Control: {{isset($historia->frecuencia->nombre) ? $historia->frecuencia->nombre : 'SIN INFORMACION'}}<br>
+               @if($historia->empleado()->first()->id==Auth::user()->empleado->id)
+               <a href="../historias/{{ $historia->id }}/edit" class="btn btn-success btn-sm">Editar</a>
+               @endif
                @endif
             
                      

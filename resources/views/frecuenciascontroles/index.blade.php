@@ -1,14 +1,18 @@
-@extends('index')
+@extends('parameters')
 
-@section('content')
+@section('parametersContent')
+
+   <h1>Frecuencias de Control</h1>
     
-   <button type="button" class="btn btn-primary" onclick="location.href='frecuenciascontroles/create'">Agregar Nuevo</button>
-   <table class="table" id="tabla" style="width:auto">
-      <thead>
+   <button type="button" class="btn btn-info" onclick="location.href='frecuenciascontroles/create'">Agregar Nuevo</button>
+   <br><br>
+   <div class="table-responsive-sm">
+   <table class="table table-striped" id="tabla" style="width:auto">
+      <thead class="thead-dark">
          <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
          </tr>
       </thead>
       <tbody>

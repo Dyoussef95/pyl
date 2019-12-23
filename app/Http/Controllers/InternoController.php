@@ -14,6 +14,7 @@ use App\Sexo;
 use App\Caps;
 use App\trabajo;
 use App\Localidad;
+use App\Nacionalidad;
 use App\SituacionSalud;
 use App\SituacionSaludEnfermedad;
 use App\Historia;
@@ -24,9 +25,12 @@ class InternoController extends Controller
 
     public function index()
     {
-        $internos = Interno :: orderBy('apellido','asc')->get();
+        $internos = Interno :: orderBy('apellido','desc')->get();
         $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();
-        //dd($internos);
+      
+        
+    
+        
         return view('internos.index', compact('internos','situacionsaludenfermedads'));
     }
 
@@ -35,8 +39,8 @@ class InternoController extends Controller
     $situacionsaluds = SituacionSalud :: get();
     $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();
     $edad = Carbon::parse($interno->fecha_nacimiento)->age;
-    dd($interno->historia);
-     return view('internos.show',compact('situacionsaludenfermedads','situacionsaluds'))->with('interno',$interno)->with('historia',$interno->historia)->with('edad',$edad);
+   
+     return view('internos.show',compact('situacionsaludenfermedads','situacionsaluds'))->with('interno',$interno)->with('historia',$interno->historia()->first())->with('edad',$edad);
     }
 
     public function create()
@@ -46,12 +50,14 @@ class InternoController extends Controller
         $nivelestudios = NivelEstudio::all();
         $tipodocumentos = TipoDocumento::all();
         $sexos = Sexo::all();
-        $trabajos = trabajo::all();
+        $trabajos = Trabajo::all();
         $localidades = Localidad::all();
         $juzgadotipos = JuzgadoTipo::all();
+        $nacionalidades = Nacionalidad::all();
+
 
        return view('internos.create', compact('estadociviles','situacioneslaborales','nivelestudios','tipodocumentos','sexos'
-                    ,'trabajos','localidades','juzgadotipos'));
+                    ,'trabajos','localidades','juzgadotipos','nacionalidades'));
     }
 
     public function store(Request $request)
@@ -84,21 +90,22 @@ class InternoController extends Controller
         $trabajos = trabajo::all();
         $localidades = Localidad::all();
         $juzgadotipos = JuzgadoTipo::all();
+        $nacionalidades = Nacionalidad::all();
 
        return view('internos.edit', compact('interno','estadociviles','situacioneslaborales','nivelestudios','tipodocumentos','sexos'
-                    ,'trabajos','localidades','juzgadotipos'));
+                    ,'trabajos','localidades','juzgadotipos','nacionalidades'));
     }
 
-    public function update(Interno $interno)
+    public function update(Request $request, Interno $interno)
     {
-       $interno->update(request()->all());
+       $interno->update($request->all());
        return redirect('internos');
     }
 
     public function destroy(Interno $interno)
     {
         $interno->delete();
-
-        return redirect('internos');
+        $url=request()->url;
+        return redirect($url);
     }
 }

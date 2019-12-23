@@ -33,6 +33,7 @@ class Interno extends Model
         'observaciones',
         'trabajo_id',
         'localidad_id',
+        'nacionalidad_id',
         'habilitado'
     ];
 
@@ -89,6 +90,10 @@ class Interno extends Model
     public function sexo()
     {
         return $this->belongsTo('App\Sexo', 'sexo_id');
+    }
+    public function nacionalidad()
+    {
+        return $this->belongsTo(Nacionalidad::class);
     }
     
     public function historia()

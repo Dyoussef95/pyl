@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Autenticacion\Usuario;
+use App\User;
+use App\Empleado;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsuarioController extends Controller
 {
@@ -14,13 +17,24 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario :: all();
-        return view('personal.usuarios.index', compact('usuarios'));
+        $usuarios = User :: all();
+        return view('usuarios.index', compact('usuarios'));
     }
 
     public function create()
     {
-        return view('personal.usuarios.crear');
+        return view('usuarios.create');
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nombre' => ['required', 'alpha', 'max:255'],
+            'apellido' => ['required', 'alpha', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
     }
 
     /**
@@ -29,10 +43,34 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $data)
     {
-        Usuario::create($request->all());
-        return "Completado";
+        
+        $data->validate([
+            'nombre' => ['required', 'alpha', 'max:255'],
+            'apellido' => ['required', 'alpha', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+            $url=$data->url;
+            $data->nombre=strtoupper($data->nombre);
+            $data->apellido=strtoupper($data->apellido);
+            $empleado = new Empleado();
+            $empleado->nombre=$data->nombre;
+            $empleado->apellido=$data->apellido;
+            $empleado->save();
+
+            $user = new User();
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->password = Hash::make($data->password);
+            $user->save();  
+            $user->empleado()->save($empleado);
+            
+            return  redirect('usuarios');
+        
     }
 
     /**
@@ -46,6 +84,12 @@ class UsuarioController extends Controller
         
     }
 
+
+    public function edit(User $usuario){
+        
+        return view('usuarios.edit')->with('usuario',$usuario);
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -53,9 +97,15 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(User $usuario)
     {
-        //
+        
+        $usuario->name = request()->name;
+        $usuario->email = request()->email;
+        $usuario->password = Hash::make(request()->password);
+        
+        $usuario->save();
+        return redirect('usuarios');
     }
 
     /**
@@ -64,8 +114,12 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        //
+        $usuario->delete();
+
+        return redirect('usuarios');
     }
+
+   
 }

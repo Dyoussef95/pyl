@@ -36,12 +36,17 @@
             <td>{!! $interno->numero_documento !!}</td>
             <td>{!! $interno->legajo !!}</td>
             <td>
+            @if($interno->historia()->first()->empleado()->first()->id==Auth::user()->empleado->id)
                <a href="internos/{{ $interno->id }}/edit" class="btn btn-success btn-sm m-0">Editar</a>
+            @endif
             </td>
             <td>
                <form action="/internos/{{ $interno->id}}" method="POST">
                   @method('DELETE')
                   @csrf
+                  <div class="form-group">
+                     <input type="hidden" name="url" class="form-control" id="" value={{URL::current()}}>
+                  </div>
                   <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                </form>
             </td>
