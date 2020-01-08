@@ -29,8 +29,8 @@ class UsuarioController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nombre' => ['required', 'alpha', 'max:255'],
-            'apellido' => ['required', 'alpha', 'max:255'],
+            'nombre' => ['required', 'regex:/^[\pL\s\-]+$/u', 'max:255'],
+            'apellido' => ['required', 'regex:/^[\pL\s\-]+$/u', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
@@ -47,8 +47,8 @@ class UsuarioController extends Controller
     {
         
         $data->validate([
-            'nombre' => ['required', 'alpha', 'max:255'],
-            'apellido' => ['required', 'alpha', 'max:255'],
+            'nombre' => ['required', 'regex:/^[\pL\s\-]+$/u', 'max:255'],
+            'apellido' => ['required', 'regex:/^[\pL\s\-]+$/u', 'max:255'],
             'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],

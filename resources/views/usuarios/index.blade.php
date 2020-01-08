@@ -1,8 +1,9 @@
 @extends('index')
 
 @section('content')
-<h1>Usuarios</h1>
-    
+<div class="card-header"><h1>Usuarios</h1></div>
+
+<div class="card-body">  
 <button type="button" class="btn btn-primary" onclick="location.href='usuarios/create'" >Agregar Nuevo</button>
     <br><br>
     <div class="table-responsive-sm">
@@ -38,6 +39,7 @@
           @endforeach
        </tbody>
     </table>
+   </div>
 
      
 @endsection

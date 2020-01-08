@@ -115,8 +115,8 @@ class HistoriaController extends Controller
     public function storeMesaEntrada(Request $request){
 
         $request->validate([
-            'nombre' => 'alpha',
-            'apellido'=>'alpha',
+            'nombre' => 'regex:/^[\pL\s\-]+$/u',
+            'apellido'=>'regex:/^[\pL\s\-]+$/u',
         ]);
 
         

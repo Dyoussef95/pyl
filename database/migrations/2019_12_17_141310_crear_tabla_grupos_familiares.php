@@ -22,6 +22,7 @@ class CrearTablaGruposFamiliares extends Migration
             $table->integer('parentesco_id')->unsigned()->nullable();
             $table->foreign('parentesco_id')->references('id')->on('parentescos')->onUpdate('cascade');
             $table->date('fecha_nacimiento')->nullable();
+            $table->string('domicilio',40)->nullable(); 
             $table->integer('numero_documento')->nullable();
             $table->integer('tipo_documento_id')->unsigned()->nullable();
             $table->foreign('tipo_documento_id')->references('id')->on('tipo_documento')->onUpdate('cascade');
@@ -33,8 +34,8 @@ class CrearTablaGruposFamiliares extends Migration
             $table->foreign('estado_civil_id')->references('id')->on('estado_civiles')->onUpdate('cascade');
             $table->integer('situacion_laboral_id')->unsigned()->nullable();
             $table->foreign('situacion_laboral_id')->references('id')->on('situaciones_laborales')->onUpdate('cascade');
-            $table->integer('oficio_id')->nullable()->unsigned();
-            $table->foreign('oficio_id')->references('id')->on('oficios')->onUpdate('cascade');
+            $table->integer('trabajo_id')->nullable()->unsigned();
+            $table->foreign('trabajo_id')->references('id')->on('trabajos')->onUpdate('cascade');
             $table->text('observacion')->nullable();         
             $table->boolean('habilitado');  
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Interno;
 use App\TipoDelito;
@@ -18,6 +19,7 @@ use App\Nacionalidad;
 use App\SituacionSalud;
 use App\SituacionSaludEnfermedad;
 use App\Historia;
+use App\GrupoFamiliar;
 use Carbon\Carbon;
 
 class InternoController extends Controller
@@ -26,11 +28,7 @@ class InternoController extends Controller
     public function index()
     {
         $internos = Interno :: orderBy('apellido','desc')->get();
-        $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();
-      
-        
-    
-        
+        $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();        
         return view('internos.index', compact('internos','situacionsaludenfermedads'));
     }
 
@@ -38,9 +36,14 @@ class InternoController extends Controller
     {
     $situacionsaluds = SituacionSalud :: get();
     $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();
+    $gruposFamiliares = GrupoFamiliar::get(); 
+    /*if($gruposFamiliares->isEmpty()){
+      $gruposFamiliares=null; 
+    }*/
+    
     $edad = Carbon::parse($interno->fecha_nacimiento)->age;
    
-     return view('internos.show',compact('situacionsaludenfermedads','situacionsaluds'))->with('interno',$interno)->with('historia',$interno->historia()->first())->with('edad',$edad);
+     return view('internos.show',compact('situacionsaludenfermedads','situacionsaluds','gruposFamiliares'))->with('interno',$interno)->with('historia',$interno->historia()->first())->with('edad',$edad);
     }
 
     public function create()

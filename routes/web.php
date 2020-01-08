@@ -187,11 +187,13 @@ Route::resource('/tipomotivoingresoprogramas','TipoMotivoIngresoProgramaControll
 
 Route::resource('/nacionalidades','NacionalidadController')->parameters([
     'nacionalidades' => 'nacionalidad'
-]);;
+]);
 
 Route::resource('/tipostratamientosconsumos','TipoTratamientoConsumoController')->parameters([
     'tipostratamientosconsumos' => 'tipotratamientoconsumos'
-]);;
+]);
+
+Route::get('/gruposfamiliares/{interno}','GrupoFamiliarController@index')->name('gruposfamiliares.index');
 
 Route::get('/', 'PatronatoController@index');
 
