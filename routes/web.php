@@ -197,6 +197,8 @@ Route::get('/gruposfamiliares/{interno}','GrupoFamiliarController@index')->name(
 
 Route::get('/', 'PatronatoController@index');
 
+Route::post('import-internos-excel','InternoController@importExcel')->name('internos.import.excel');
+
 Route::get('asistidos', function() {
 	return view('asistidos.asistidosIndex');
 });

@@ -4,7 +4,22 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.css') }}">
 @endsection
 @section('content')
+
+<form action="{{ route('internos.import.excel') }}" method="post" enctype="multipart/form-data">
+   @csrf
+   @if(Session::has('message'))
+      <p>{{ Session::get('message') }}</p>
+   @endif
+   
+
+   <input type="file" name="file" id="file">
+
+   <button class="btn btn-primary">Importar</button>
+  
+</form>
+
 <button type="button" class="btn btn-primary" onclick="location.href='internos/create'">Agregar Nuevo</button>
+
 <br><br>
 <!--<input type="text" id="myInput" onkeyup="search()" placeholder="Buscar..">
 <h4>Buscar por:</h4>
