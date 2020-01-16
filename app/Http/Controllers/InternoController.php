@@ -22,6 +22,9 @@ use App\Historia;
 use App\GrupoFamiliar;
 use Carbon\Carbon;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\InternosImport;
+
 class InternoController extends Controller
 {
 
@@ -110,5 +113,14 @@ class InternoController extends Controller
         $interno->delete();
         $url=request()->url;
         return redirect($url);
+    }
+
+    public function importExcel(Request $request)
+    {
+        $file = $request->file('file');
+    
+        Excel::import(new InternosImport, $file);
+        
+        return back()->with('message', 'Importanción de internos completada');
     }
 }
