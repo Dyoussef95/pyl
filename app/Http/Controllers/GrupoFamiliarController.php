@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\GrupoFamiliar;
 use App\Interno;
+use App\Parentezco;
+use App\TipoDocumento;
+use App\Sexo;
+use App\NivelEstudio;
+use App\EstadoCivil;
+use App\SituacionLaboral;
+use App\Trabajo;
 use Illuminate\Http\Request;
 
 class GrupoFamiliarController extends Controller
@@ -27,9 +34,17 @@ class GrupoFamiliarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Interno $interno)
     {
-        //
+        $parentezcos=Parentezco::get();
+        $tiposDocumentos=TipoDocumento::get();
+        $sexos=Sexo::get();
+        $nivelesEstudio=NivelEstudio::get();
+        $estadosCiviles=EstadoCivil::get();
+        $situacionesLaborales=SituacionLaboral::get();
+        $trabajos=Trabajo::get();
+        return view('GruposFamiliares.create',compact('interno','parentezcos','tiposDocumentos',
+        'sexos','nivelesEstudio','estadosCiviles','situacionesLaborales','trabajos'));
     }
 
     /**

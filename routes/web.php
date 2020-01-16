@@ -194,6 +194,7 @@ Route::resource('/tipostratamientosconsumos','TipoTratamientoConsumoController')
 ]);
 
 Route::get('/gruposfamiliares/{interno}','GrupoFamiliarController@index')->name('gruposfamiliares.index');
+Route::get('/gruposfamiliares/{interno}/create','GrupoFamiliarController@create')->name('gruposfamiliares.create');
 
 Route::get('/', 'PatronatoController@index');
 

@@ -3,9 +3,9 @@
 @section('content')
     
     <form action="/frecuenciascontroles" method="POST" role="form">
-        <legend>Crear nueva Frecuencia de Control</legend>
+        <legend>Agregar miembro al grupo familiar de: {!! $interno->nombre !!} {!!$interno->apellido !!}</legend>
     
-        @include('frecuenciascontroles._form')
+        @include('GruposFamiliares._form')
 
     
         <button type="submit" class="btn btn-primary">Agregar</button>

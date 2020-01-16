@@ -5,7 +5,7 @@
 
 <h1>Grupo Familiar de {!!  $interno->nombre  !!} {!!  $interno->apellido  !!}</h1>
     
-   <button type="button" class="btn btn-info" onclick="location.href='gruposfamiliares/create'">Agregar Nuevo</button>
+<a type="button" class="btn btn-info" href={{ route('gruposfamiliares.create', ['interno' => $interno])  }}>Agregar Nuevo</a>
    <br><br>
    @include('GruposFamiliares._index')
 
