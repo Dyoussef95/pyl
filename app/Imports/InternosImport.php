@@ -30,27 +30,23 @@ class InternosImport implements ToCollection
         {
             $empleados = Empleado::get();
             foreach($empleados as $empleado){
-                echo $empleado->nombre;
-                echo '  ';
+                $empleado->nombre .= ' '.$empleado->apellido;
+                if (isset($row[20]) && is_int($row[20]) && isset($row[30]) && $empleado->nombre==strtoupper($row[30])) {
+                
+                
+                    $nombres = explode(', ',$row[1]);//divide una cadena cada vez que encuentra el primer argumento, retorna un array
+                    Interno::create([
+                        'legajo' => $row[20],
+                        'apellido' => $nombres[0],
+                        'nombre' => $nombres[1],
+                        'fecha_nacimiento' => Date::excelToDateTimeObject($row[12]),//convierte el valor devuelto por el excel a formato datatime
+                        'numero_documento' => $row[4],
+                        'domicilioDeclarado' => $row[5],
+                    ]);
+                }
             }
-            /*if (isset($row[20]) && is_int($row[20]) && isset($row[30])) {
-               
-               
-                $nombres = explode(', ',$row[1]);
-                echo $nombres[1];
-                echo $row[0];
-                echo '  ';
-                Interno::create([
-                    'legajo' => $row[20],
-                    'apellido' => $nombres[0],
-                    'nombre' => $nombres[1],
-                    
-                ]);
-            }*/
-            dd('fin');
+            
         }
       
-
-        
     }
 }
