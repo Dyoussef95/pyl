@@ -7,7 +7,7 @@
 
 <div class="form-group">
     <label for="">Apellido</label>
-<input type="text" name="nombre" value="{{ isset($grupoFamiliar) ? $grupoFamiliar->apellido : '' }}" class="form-control" id="" placeholder="Ingrese los apellidos">
+<input type="text" name="apellido" value="{{ isset($grupoFamiliar) ? $grupoFamiliar->apellido : '' }}" class="form-control" id="" placeholder="Ingrese los apellidos">
 </div>
 
 <div class="form-group">
@@ -129,7 +129,7 @@
 </div>
 
 <div class="form-group">
-    <label for="">Trabajo: </label>
+    <label for="">Oficio / Profesion: </label>
     <select name="trabajo_id" form="form" class="select2" style="width:400px;">
         @if (isset($trabajos))
             @foreach ($trabajos as $trabajo)

@@ -1,8 +1,15 @@
-<div class="table-responsive-sm">
-    <table class="table table-striped" id="tabla" style="width:auto">
+<h1>Grupo Familiar de {!!  $interno->nombre  !!} {!!  $interno->apellido  !!}</h1>
+    
+<a type="button" class="btn btn-info" href={{ route('gruposfamiliares.create', ['interno' => $interno])  }}>Agregar Nuevo</a>
+   <br><br>
+
+<div class="table-responsive">
+    <table class="table table-striped" id="tabla"  style="width:auto">
        <thead class="thead-dark">
           <tr>
              <th scope="col">Nombre</th>
+             <th scope="col">Apellido</th>
+             <th scope="col">Parentezco</th>
              <th scope="col"></th>
              <th scope="col"></th>
           </tr>
@@ -10,14 +17,19 @@
        <tbody>
           @foreach($gruposFamiliares as $grupoFamiliar)
              <tr>
-                <td>{!! $grupoFamiliar !!}</td>
+                <td>{!! $grupoFamiliar->nombre !!}</td>
+                <td>{!! $grupoFamiliar->apellido !!}</td>
+                <td>{!! $parentezcos->find($grupoFamiliar->parentesco_id)->nombre !!}</td>
                 <td>
-                   <a href="frecuenciascontroles/edit" class="btn btn-success btn-sm">Editar</a>
+                   <a href="gruposFamiliares/edit" class="btn btn-success btn-sm">Editar</a>
                 </td>
                 <td>
-                   <form action="/frecuenciascontroles" method="POST">
+                   <form action={{ route('gruposfamiliares.destroy', ['interno' => $interno, 'grupoFamiliar' => $grupoFamiliar])  }} method="POST">
                       @method('DELETE')
                       @csrf
+                      <div class="form-group">
+                        <input type="hidden" name="url" class="form-control" id="" value="{{URL::current()}}">
+                      </div>
                       <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                    </form>                     
                 </td>
@@ -25,3 +37,4 @@
           @endforeach
        </tbody>
     </table>
+</div>

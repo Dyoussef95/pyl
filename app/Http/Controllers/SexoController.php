@@ -28,7 +28,10 @@ class SexoController extends Controller
     public function store(Request $request)
     {
         $url=$request->input('url');
-        Sexo::create($request->all());
+        $sexo = new Sexo;
+        $sexo->nombre = strtoupper($request->nombre);
+        $sexo->habilitado = true;
+        $sexo->save();
         //dd($request->all());
         return redirect($url);
     }

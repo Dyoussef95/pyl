@@ -9,7 +9,7 @@
 
 <button type="button" class="btn btn-primary" onclick="location.href='usuarios/create'">Agregar Nuevo</button>
 <br><br>
-<div class="table-responsive-sm">
+<div class="table-responsive">
    <table class="table table-striped" id="tabla" style="width:auto">
       <thead class="thead-dark">
          <tr>
@@ -22,17 +22,17 @@
          </tr>
       </thead>
       <tbody>
-         @foreach($usuarios as $usuario)
+         @foreach($empleados as $empleado)
          <tr>
-            <td>{!! $usuario->empleado->nombre !!}</td>
-            <td>{!! $usuario->empleado->apellido !!}</td>
-            <td>{!! $usuario->name !!}</td>
-            <td>{!! $usuario->email !!}</td>
+            <td>{!! $empleado->nombre !!}</td>
+            <td>{!! $empleado->apellido !!}</td>
+            <td>{!! $usuarios->find($empleado->user_id)->name !!}</td>
+            <td>{!! $usuarios->find($empleado->user_id)->email !!}</td>
             <td>
-               <a href="usuarios/{{ $usuario->id }}/edit" class="btn btn-success btn-sm">Editar</a>
+               <a href="usuarios/{{ $empleado->user_id }}/edit" class="btn btn-success btn-sm">Editar</a>
             </td>
             <td>
-               <form action="/usuarios/{{ $usuario->id}}" method="POST">
+               <form action="/usuarios/{{ $empleado->user_id }}" method="POST">
                   @method('DELETE')
                   @csrf
                   <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

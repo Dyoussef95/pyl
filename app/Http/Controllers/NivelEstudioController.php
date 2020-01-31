@@ -27,7 +27,7 @@ class NivelEstudioController extends Controller
     public function store(Request $request)
     {
         $nivelestudio = new NivelEstudio;
-        $nivelestudio->nombre=$request->input('nombre');
+        $nivelestudio->nombre=strtoupper($request->input('nombre'));
         $nivelestudio->habilitado=true;
         $nivelestudio->save();
         //NivelEstudio::create($request->all());
@@ -41,7 +41,7 @@ class NivelEstudioController extends Controller
 
     public function update(NivelEstudio $nivelestudio)
     {
-       $nivelestudio->nombre=request()->nombre;
+       $nivelestudio->nombre=strtoupper(request()->nombre);
        $nivelestudio->save();
        return redirect('nivelestudio');
     }

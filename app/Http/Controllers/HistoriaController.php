@@ -72,7 +72,7 @@ class HistoriaController extends Controller
     {
         
         $url=$request->url;
-
+        
        $historia->update($request->all());
        /*se controla si en el formulario se modifica el empleado asociado a la historia*/
        if(isset($request->empleado_id)){
@@ -80,7 +80,10 @@ class HistoriaController extends Controller
             $historia->empleado()->detach($empleado_id);
             $historia->empleado()->attach($request->empleado_id);
        }
-       return redirect($url);
+       $interno= $historia->interno_id;
+       $procedencia=2;
+
+       return redirect()->route('internos.show',[$interno,$procedencia]);
     }
 
     public function destroy(Historia $historia)

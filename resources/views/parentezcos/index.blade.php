@@ -1,14 +1,18 @@
-@extends('index')
+@extends('parameters')
 
-@section('content')
-    
-   <button type="button" class="btn btn-primary" onclick="location.href='parentezcos/create'">Agregar Nuevo</button>
-   <table class="table" id="tabla" style="width:auto">
-      <thead>
+@section('parametersContent')
+
+   <h1>Parentezcos</h1>
+
+   <button type="button" class="btn btn-info" onclick="location.href='parentezcos/create'">Agregar Nuevo</button>
+   <br><br>
+   <div class="table-responsive-sm">
+   <table class="table table-striped" id="tabla" style="width:auto">
+      <thead class="thead-dark">
          <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
          </tr>
       </thead>
       <tbody>

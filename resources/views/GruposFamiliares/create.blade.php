@@ -2,7 +2,7 @@
 
 @section('content')
     
-    <form action="/frecuenciascontroles" method="POST" role="form">
+    <form action={{ route('gruposfamiliares.store', ['interno' => $interno]) }} method="POST" role="form" id="form">
         <legend>Agregar miembro al grupo familiar de: {!! $interno->nombre !!} {!!$interno->apellido !!}</legend>
     
         @include('GruposFamiliares._form')

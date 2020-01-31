@@ -22,11 +22,9 @@ class GrupoFamiliarController extends Controller
      */
     public function index(Interno $interno)
     {
-        $gruposFamiliares = GrupoFamiliar::get();
-        
-        
-
-        return view('GruposFamiliares.index',compact('gruposFamiliares','interno'));
+        $gruposFamiliares = GrupoFamiliar::get()->where('interno_id',$interno->id);
+        $parentezcos = Parentezco::get();
+        return view('GruposFamiliares.index',compact('gruposFamiliares','interno','parentezcos'));
     }
 
     /**
@@ -53,9 +51,28 @@ class GrupoFamiliarController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Interno $interno)
     {
-        //
+        $grupoFamiliar = new GrupoFamiliar;
+        $grupoFamiliar->nombre=strtoupper($request->nombre);
+        $grupoFamiliar->apellido=strtoupper($request->apellido);
+        $grupoFamiliar->interno_id=$interno->id;
+        $grupoFamiliar->parentesco_id=$request->parentezco_id;
+        $grupoFamiliar->fecha_nacimiento=$request->fecha_nacimiento;
+        $grupoFamiliar->domicilio=$request->domicilio;
+        $grupoFamiliar->numero_documento=$request->numero_documento;
+        $grupoFamiliar->tipo_documento_id=$request->tipo_documento_id;
+        $grupoFamiliar->sexo_id=$request->sexo_id;
+        $grupoFamiliar->nivel_estudio_id=$request->nivel_estudio_id;
+        $grupoFamiliar->estado_civil_id=$request->estado_civil_id;
+        $grupoFamiliar->situacion_laboral_id=$request->situacion_laboral_id;
+        $grupoFamiliar->trabajo_id=$request->trabajo_id;
+        $grupoFamiliar->observacion=$request->observacion;
+        $grupoFamiliar->save();
+        $procedencia=4;
+        return redirect()->route('internos.show', [$interno,$procedencia]);
+        /*nombre apellido parentezco_id fecha_nacimiento tipo_documento_id numero_documento sexo_id 
+          domicilio nivel_estudio_id  estado_civil_id situacion_laboral_id trabajp_id observacion */
     }
 
     /**
@@ -98,8 +115,10 @@ class GrupoFamiliarController extends Controller
      * @param  \App\GrupoFamiliar  $grupoFamiliar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GrupoFamiliar $grupoFamiliar)
+    public function destroy(Interno $interno,GrupoFamiliar $grupoFamiliar)
     {
-        //
+        $grupoFamiliar->delete();
+        $procedencia=4;
+        return redirect()->route('internos.show', [$interno,$procedencia]);
     }
 }

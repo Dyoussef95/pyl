@@ -18,8 +18,8 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = User :: all();
-        $empleados = Empleado :: all();
-        //dd($empleados);
+        $empleados = Empleado :: orderBy('nombre','asc')->get();
+        //dd($usuarios->find(4));
         return view('usuarios.index', compact('usuarios','empleados'));
     }
 

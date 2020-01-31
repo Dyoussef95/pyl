@@ -29,7 +29,7 @@ class TipoDocumentoController extends Controller
     {
         $url = request()->url;
         $tipodocumento = new TipoDocumento;
-        $tipodocumento->nombre=$request->input('nombre');
+        $tipodocumento->nombre=strtoupper($request->input('nombre'));
         $tipodocumento->habilitado=true;
         $tipodocumento->save();
         //TipoDocumento::create($request->all());
@@ -43,7 +43,7 @@ class TipoDocumentoController extends Controller
     public function update(TipoDocumento $tipodocumento)
     {
         $url = request()->url;
-       $tipodocumento->nombre=request()->nombre;
+       $tipodocumento->nombre=strtoupper(request()->nombre);
        $tipodocumento->save();
        return redirect($url);
     }

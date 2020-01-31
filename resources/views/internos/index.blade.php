@@ -40,21 +40,19 @@
             <th scope="col">N° de legajo <!--<i onclick="sortTable(5)" style="cursor: pointer;" class="fas fa-sort">--></i>
             </th>
             <th scope="col"></th>
-            <th scope="col"></th>
          </tr>
       </thead>
       <tbody>
          @foreach($internos as $interno)
-         <tr onclick="location.href='/internos/{{$interno->id}}'" style="cursor: pointer;">
+         <tr
+         @if($interno->historia()->first()->empleado()->first()->id==Auth::user()->empleado->id)
+         class="table-primary"
+         @endif
+          onclick="location.href='/internos/{{$interno->id}}'" style="cursor: pointer;">
             <td onclick="location.href='/internos/{{$interno->id}}'">{!! $interno->apellido !!}</td>
             <td>{!! $interno->nombre !!}</td>
             <td>{!! $interno->numero_documento !!}</td>
             <td>{!! $interno->legajo !!}</td>
-            <td>
-            @if($interno->historia()->first()->empleado()->first()->id==Auth::user()->empleado->id)
-               <a href="internos/{{ $interno->id }}/edit" class="btn btn-success btn-sm m-0">Editar</a>
-            @endif
-            </td>
             <td>
                <form action="/internos/{{ $interno->id}}" method="POST">
                   @method('DELETE')

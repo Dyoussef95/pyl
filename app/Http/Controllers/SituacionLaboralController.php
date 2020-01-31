@@ -28,7 +28,7 @@ class SituacionLaboralController extends Controller
     public function store(Request $request)
     {
         $situacionlaboral = new SituacionLaboral;
-        $situacionlaboral->nombre=$request->input('nombre');
+        $situacionlaboral->nombre=strtoupper($request->input('nombre'));
         $situacionlaboral->habilitado=true;
         $situacionlaboral->save();
         //SituacionLaboral::create($request->all());
@@ -41,7 +41,7 @@ class SituacionLaboralController extends Controller
 
     public function update(SituacionLaboral $situacionlaboral)
     {
-       $situacionlaboral->nombre=request()->nombre;
+       $situacionlaboral->nombre=strtoupper(request()->nombre);
        $situacionlaboral->save();
        return redirect('situacioneslaborales');
     }

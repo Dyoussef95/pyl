@@ -28,7 +28,7 @@ class ParentezcoController extends Controller
     public function store(Request $request)
     {
         $parentezco = new Parentezco;
-        $parentezco->nombre=$request->input('nombre');
+        $parentezco->nombre=strtoupper($request->input('nombre'));
         $parentezco->habilitado=true;
         $parentezco->save();
         //Parentezco::create($request->all());
@@ -41,7 +41,7 @@ class ParentezcoController extends Controller
 
     public function update(Parentezco $parentezco)
     {
-       $parentezco->nombre=request()->nombre;
+       $parentezco->nombre=strtoupper(request()->nombre);
        $parentezco->save();
        return redirect('parentezcos');
     }

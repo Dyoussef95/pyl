@@ -122,6 +122,13 @@ Route::resource('/tipodocumentos','TipoDocumentoController');
 
 Route::resource('/delitoespecificos','DelitoEspecificoController');
 
+Route::get('/internos','InternoController@index');
+Route::get('/internos/create','InternoController@create');
+Route::get('/internos/{interno}/edit','InternoController@edit')->name('internos.edit');
+Route::get('/internos/{interno}/{procedencia?}','InternoController@show')->name('internos.show');
+Route::put('/internos/{interno}','InternoController@update');
+Route::post('/internos','InternoController@store');
+Route::delete('/internos/{interno}','InternoController@destroy');
 Route::resource('/internos','InternoController');
 
 Route::resource('/regimen','RegimenController');
@@ -195,6 +202,8 @@ Route::resource('/tipostratamientosconsumos','TipoTratamientoConsumoController')
 
 Route::get('/gruposfamiliares/{interno}','GrupoFamiliarController@index')->name('gruposfamiliares.index');
 Route::get('/gruposfamiliares/{interno}/create','GrupoFamiliarController@create')->name('gruposfamiliares.create');
+Route::post('/gruposfamiliares/{interno}','GrupoFamiliarController@store')->name('gruposfamiliares.store');
+Route::delete('gruposfamiliares/{interno}/{grupoFamiliar}','GrupoFamiliarController@destroy')->name('gruposfamiliares.destroy');
 
 Route::get('/', 'PatronatoController@index');
 

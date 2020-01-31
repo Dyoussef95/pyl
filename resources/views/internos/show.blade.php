@@ -1,21 +1,23 @@
 @extends('index')
 @section('content')
+<button type="button" class="btn btn-primary" onclick="location.href='../../internos'">Volver</button>
 <nav>
    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-datos-personales-tab" data-toggle="tab" href="#datos-personales"
+      <a class="nav-item nav-link {{ substr(url()->full(),-1)!='=' ? 'active' : ''}}" id="nav-datos-personales-tab" data-toggle="tab" href="#datos-personales"
          role="tab" aria-controls="datos-personales" aria-selected="true">Datos Personales</a>
-      <a class="nav-item nav-link" id="nav-datos-legales-tab" data-toggle="tab" href="#datos-legales" role="tab"
+      <a class="nav-item nav-link {{ substr(url()->full(),-2)=='2=' ? 'active' : ''}}" id="nav-datos-legales-tab" data-toggle="tab" href="#datos-legales" role="tab"
          aria-controls="datos-legales" aria-selected="false">Datos Legales</a>
       <a class="nav-item nav-link" id="nav-datos-salud-tab" data-toggle="tab" href="#datos-salud" role="tab"
          aria-controls="datos-salud" aria-selected="false">Datos de Salud</a>
-      <a class="nav-item nav-link" id="nav-grupo-familiar-tab" data-toggle="tab" href="#grupo-familiar" role="tab"
-         aria-controls="grupo-familiar" aria-selected="false">Grupo Familiar</a>
+      <a class="nav-item nav-link {{ substr(url()->full(),-2)=='4=' ? 'active' : ''}}" id="nav-grupo-familiar-tab" data-toggle="tab" href="#grupo-familiar" role="tab"
+   aria-controls="grupo-familiar" aria-selected="false"
+         >Grupo Familiar</a>
    </div>
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
    
-   <div class="tab-pane fade show active" id="datos-personales" role="tabpanel" aria-labelledby="ndatos-personales-tab">
+   <div class="tab-pane fade {{ substr(url()->full(),-1)!='=' ? 'show active' : ''}}" id="datos-personales" role="tabpanel" aria-labelledby="ndatos-personales-tab">
       Nombre: {!!$interno->nombre!!} <br>
       Apellido: {!!$interno->apellido!!} <br>
       Genero: {{isset($interno->sexo) ? $interno->sexo->nombre : 'SIN INFORMACION'}} <br>
@@ -32,9 +34,13 @@
       Situacion Laboral:
       {{isset($interno->situacion_laboral) ? $interno->situacion_laboral->nombre : 'SIN INFORMACION'}} <br>
       Trabajo: {{isset($interno->trabajo) ? $interno->trabajo->nombre : 'SIN INFORMACION'}} <br>
+
+      @if($interno->historia()->first()->empleado()->first()->id==Auth::user()->empleado->id)
+      <a href="../internos/{{ $interno->id }}/edit" class="btn btn-success btn-sm m-0">Editar</a>
+      @endif
    </div>
 
-   <div class="tab-pane fade" id="datos-legales" role="tabpanel" aria-labelledby="datos-legales-tab">
+   <div class="tab-pane fade {{ substr(url()->full(),-2)=='2=' ? 'show active' : ''}}" id="datos-legales" role="tabpanel" aria-labelledby="datos-legales-tab">
       @if($historia==null)
          No hay datos registrados...
          <br>
@@ -72,16 +78,9 @@
       @endempty
    </div>
 
-   <div class="tab-pane fade" id="grupo-familiar" role="tabpanel" aria-labelledby="grupo-familiar-tab">
-      @if($gruposFamiliares->isEmpty()) 
-      No hay datos registrados...
-      <br>
-      <a href={{ route('gruposfamiliares.index', ['interno' => $interno])  }} class="btn btn-primary btn-sm m-0">Ingresar Datos</a>
-   
-         
-      @else
-         @include('GruposFamiliares._index')
-      @endif
+   <div class="tab-pane fade {{ substr(url()->full(),-2)=='4=' ? 'show active' : ''}}" id="grupo-familiar" role="tabpanel" aria-labelledby="grupo-familiar-tab">
+      
+      @include('GruposFamiliares._index')
    </div>
 </div>
 

@@ -51,6 +51,15 @@
 </div>
 
 <div class="form-group">
+    <label for="">Departamento</label>
+    <select name="departamento_id" form="form" class="select2" style="width:400px;">            
+        @foreach ($departamentos as $departamento)
+           <option value={{ $departamento->id }}>{{ $departamento->nombre }}</option>
+        @endforeach            
+    </select>
+</div>
+
+<div class="form-group">
     <label for="">Localidad</label>
     <select name="localidad_id" form="form" class="select2" style="width:400px;">            
         @foreach ($localidades as $localidad)
@@ -122,7 +131,7 @@
                     <option value={{ $trabajo->id }}>{{ $trabajo->nombre }}</option>
                 @endforeach            
         </select>
-        <i class="fas fa-plus-circle" onclick="location.href='../trabajos/create'" style="cursor: pointer;"></i>
+        <i class="fas fa-plus-circle" onclick="" style="cursor: pointer;"></i>
 </div>
 
 <div class="form-group">
