@@ -43,4 +43,8 @@ class User extends Authenticatable
     public function empleado(){
         return $this->hasOne(Empleado::class);
     }
+
+    public function rol(){
+        return Rol::find($this->rol_id);
+    }
 }

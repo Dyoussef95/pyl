@@ -9,12 +9,12 @@
 <div class="card-header"><legend>Editar usuario</legend></div>
     <div class="card-body">
     
-    <form action="/usuarios/{{$usuario->id}}" method="POST" role="form">
+    <form action="/usuarios/{{$usuario->id}}" method="POST" role="form" id="form">
         @method('PUT')
         @csrf
         Editar Trabajo {{ $usuario->name }}
 
-        @include('usuarios._form2')
+        @include('usuarios._form')
     
         <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">

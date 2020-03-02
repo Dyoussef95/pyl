@@ -205,6 +205,11 @@ Route::get('/gruposfamiliares/{interno}/create','GrupoFamiliarController@create'
 Route::post('/gruposfamiliares/{interno}','GrupoFamiliarController@store')->name('gruposfamiliares.store');
 Route::delete('gruposfamiliares/{interno}/{grupoFamiliar}','GrupoFamiliarController@destroy')->name('gruposfamiliares.destroy');
 
+Route::resource('roles','RolController')->parameters([
+	'roles' => 'rol'
+]);
+
+
 Route::get('/', 'PatronatoController@index');
 
 Route::post('import-internos-excel','InternoController@importExcel')->name('internos.import.excel');

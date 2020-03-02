@@ -22,6 +22,7 @@ use App\SituacionSaludEnfermedad;
 use App\Historia;
 use App\GrupoFamiliar;
 use App\Parentezco;
+use App\Empleado;
 use Carbon\Carbon;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,10 +47,11 @@ class InternoController extends Controller
     /*if($gruposFamiliares->isEmpty()){
       $gruposFamiliares=null; 
     }*/
+    $empleado_id = $interno->historia()->first()->empleado()->first()->id;
     
     $edad = Carbon::parse($interno->fecha_nacimiento)->age;
    
-     return view('internos.show',compact('situacionsaludenfermedads','situacionsaluds','gruposFamiliares','parentezcos'))->with('interno',$interno)->with('historia',$interno->historia()->first())->with('edad',$edad);
+     return view('internos.show',compact('empleado_id','situacionsaludenfermedads','situacionsaluds','gruposFamiliares','parentezcos'))->with('interno',$interno)->with('historia',$interno->historia()->first())->with('edad',$edad);
     }
 
     public function create()
@@ -123,7 +125,7 @@ class InternoController extends Controller
     public function importExcel(Request $request)
     {
         $file = $request->file('file');
-    
+        
         Excel::import(new InternosImport, $file);
         
         return back()->with('message', 'Importanción de internos completada');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Empleado;
+use App\Rol;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,13 +20,15 @@ class UsuarioController extends Controller
     {
         $usuarios = User :: all();
         $empleados = Empleado :: orderBy('nombre','asc')->get();
+        $roles = Rol::get();
         //dd($usuarios->find(4));
-        return view('usuarios.index', compact('usuarios','empleados'));
+        return view('usuarios.index', compact('usuarios','empleados','roles'));
     }
 
     public function create()
     {
-        return view('usuarios.create');
+        $roles = Rol::get();
+        return view('usuarios.create',compact('roles'));
     }
 
     protected function validator(array $data)
@@ -55,7 +58,6 @@ class UsuarioController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
-
             $url=$data->url;
             $data->nombre=strtoupper($data->nombre);
             $data->apellido=strtoupper($data->apellido);
@@ -68,6 +70,7 @@ class UsuarioController extends Controller
             $user->name = $data->name;
             $user->email = $data->email;
             $user->password = Hash::make($data->password);
+            $user->rol_id = $data->rol_id;
             $user->save();  
             $user->empleado()->save($empleado);
             
@@ -89,7 +92,9 @@ class UsuarioController extends Controller
 
     public function edit(User $usuario){
         
-        return view('usuarios.edit')->with('usuario',$usuario);
+       $roles = Rol::get(); 
+       $empleado = Empleado::where('user_id',$usuario->id)->first();
+        return view('usuarios.edit',compact('usuario','roles','empleado'));
     }
 
     /**
@@ -99,13 +104,15 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $usuario)
+    public function update(User $usuario, Request $request)
     {
-        
+        $empleado = Empleado::where('user_id',$usuario->id)->first(); 
+        $empleado->nombre = $request->nombre;
+        $empleado->apellido = $request->apellido;   
         $usuario->name = request()->name;
         $usuario->email = request()->email;
+        $usuario->rol_id = $request->rol_id;
         $usuario->password = Hash::make(request()->password);
-        
         $usuario->save();
         return redirect('usuarios');
     }

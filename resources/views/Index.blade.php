@@ -54,7 +54,7 @@
                     <div class="user-info">
                         <span class="user-name"><strong>{{ Auth::user()->empleado->nombre }}</strong><strong> {{ Auth::user()->empleado->apellido }}</strong>
                         </span>
-                        <span class="user-role">Directora</span>
+                    <span class="user-role">{{ Auth::user()->rol()->nombre }}</span>
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
                             <span>Online</span>
@@ -80,6 +80,7 @@
                         <li class="header-menu">
                             <span>CATEGORIAS</span>
                         </li>
+                        @if(Auth::user()->rol()->codigo == 1)
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fas fa-users-cog"></i>
@@ -102,6 +103,8 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
+                        @if(in_array(Auth::user()->rol()->codigo,array(1,3,5)))
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fas fa-home"></i>
@@ -122,6 +125,8 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
+                        @if(in_array(Auth::user()->rol()->codigo,array(1,2,3,4)))
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fas fa-home"></i>
@@ -180,6 +185,8 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
+                        @if(in_array(Auth::user()->rol()->codigo,array(1,2,3)))
                         <li class="sidebar-dropdown">
                             <a href="#">
                                 <i class="fa fa-globe"></i>
@@ -196,6 +203,7 @@
                                 </ul>
                             </div>
                         </li>
+                        @endif
                         <!--<li class="header-menu">
                             <span>Extra</span>
                         </li>
@@ -372,7 +380,6 @@
         </nav>
         <!-- page-content  -->
         <main class="page-content pt-2">
-            <i class="fas fa-bars"  style="font-size: 50px" id="toggle-sidebar"></i>
             <div id="overlay" class="overlay"></div>
             <div class="container-fluid p-5">
                 @yield('content')

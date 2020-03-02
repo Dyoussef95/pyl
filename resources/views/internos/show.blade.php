@@ -18,24 +18,54 @@
 <div class="tab-content" id="nav-tabContent">
    
    <div class="tab-pane fade {{ substr(url()->full(),-1)!='=' ? 'show active' : ''}}" id="datos-personales" role="tabpanel" aria-labelledby="ndatos-personales-tab">
-      Nombre: {!!$interno->nombre!!} <br>
-      Apellido: {!!$interno->apellido!!} <br>
-      Genero: {{isset($interno->sexo) ? $interno->sexo->nombre : 'SIN INFORMACION'}} <br>
-      DNI: {!! isset($interno->numero_documento) ? $interno->numero_documento : 'SIN INFORMACION' !!} <br>
-      Domicilio Declarado: {{isset($interno->domicilioDeclarado) ? $interno->domicilioDeclarado : 'SIN INFORMACION'}}
-      <br>
-      Nacionalidad: {!! isset($interno->nacionalidad) ? $interno->nacionalidad->nombre : 'SIN INFORMACION' !!} <br>
-      Localidad: {!! isset($interno->localidad) ? $interno->localidad->nombre : 'SIN INFORMACION' !!} <br>
-      Estado Civil: {{ isset($interno->estado_civil) ? $interno->estado_civil->nombre : 'SIN INFORMACION'}} <br>
-      Fecha de Nacimiento: {{ isset($interno->fecha_nacimiento) ? $interno->fecha_nacimiento : 'SIN INFORMACION'}} <br>
-      Edad: {{isset($interno->fecha_nacimiento) ? $edad : 'SIN INFORMACION' }} <br>
-      Nivel de Instruccion: {{isset($interno->nivel_estudio) ? $interno->nivel_estudio->nombre : 'SIN INFORMACION'}}
-      <br>
-      Situacion Laboral:
-      {{isset($interno->situacion_laboral) ? $interno->situacion_laboral->nombre : 'SIN INFORMACION'}} <br>
-      Trabajo: {{isset($interno->trabajo) ? $interno->trabajo->nombre : 'SIN INFORMACION'}} <br>
+      <div class="table-responsive">
+         <table class="table table-bordered border border-dark">
+            <tbody>
+               <tr>
+                  <td class="border border-dark">Nombre:</td>
+                  <td class="table-secondary border border-dark">{!!$interno->nombre!!}</td>
+                  <td class="border border-dark">Apellido:</td>
+                  <td class="table-secondary border border-dark">{!!$interno->apellido!!}</td>
+               </tr>
+               <tr>
+                  <td class="border border-dark">{!! isset($interno->tipo_documento_id) ? $interno->tipo_documento_id : 'Documento:' !!}</td>
+                  <td class="table-secondary border border-dark">{!! isset($interno->numero_documento) ? $interno->numero_documento : 'SIN INFORMACION' !!}</td>
+                  <td class="border border-dark">Genero:</td>
+                  <td class="table-secondary border border-dark">{{isset($interno->sexo) ? $interno->sexo->nombre : 'SIN INFORMACION'}} </td>
+               </tr>
+               <tr>
+                  <td class="border border-dark">Domicilio declarado:</td>
+                  <td class="table-secondary border border-dark" colspan="3">{{isset($interno->domicilioDeclarado) ? $interno->domicilioDeclarado : 'SIN INFORMACION'}}</td>
+               </tr>
+               <tr>
+                  <td class="border border-dark">Nacionalidad:</td>
+                  <td class="table-secondary border border-dark"> {!! isset($interno->nacionalidad) ? $interno->nacionalidad->nombre : 'SIN INFORMACION' !!}</td>
+                  <td class="border border-dark">Localidad:</td>
+                  <td class="table-secondary border border-dark"> {!! isset($interno->localidad) ? $interno->localidad->nombre : 'SIN INFORMACION' !!} </td>
+               </tr>
+               <tr>
+                  <td class="border border-dark">Fecha de nacimiento:</td>
+                  <td class="table-secondary border border-dark">{{ isset($interno->fecha_nacimiento) ? $interno->fecha_nacimiento : 'SIN INFORMACION'}}</td>
+                  <td class="border border-dark">Edad:</td>
+                  <td class="table-secondary border border-dark">{{isset($interno->fecha_nacimiento) ? $edad : 'SIN INFORMACION' }}</td>
+               </tr>
+               <tr>
+                  <td class="border border-dark">Estado Civil:</td>
+                  <td class="table-secondary border border-dark"> {{ isset($interno->estado_civil) ? $interno->estado_civil->nombre : 'SIN INFORMACION'}}</td>
+                  <td class="border border-dark">Nivel de instruccion:</td>
+                  <td class="table-secondary border border-dark">{{isset($interno->nivel_estudio) ? $interno->nivel_estudio->nombre : 'SIN INFORMACION'}}</td>
+               </tr>
+               <tr>
+                  <td class="border border-dark">Situacion laboral:</td>
+                  <td class="table-secondary border border-dark">{{isset($interno->situacion_laboral) ? $interno->situacion_laboral->nombre : 'SIN INFORMACION'}}</td>
+                  <td class="border border-dark">Trabajo:</td>
+                  <td class="table-secondary border border-dark">{{isset($interno->trabajo) ? $interno->trabajo->nombre : 'SIN INFORMACION'}}</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
 
-      @if($interno->historia()->first()->empleado()->first()->id==Auth::user()->empleado->id)
+      @if(Auth::user()->empleado->id==$empleado_id || in_array(Auth::user()->rol()->codigo,array(1,2)) )
       <a href="../internos/{{ $interno->id }}/edit" class="btn btn-success btn-sm m-0">Editar</a>
       @endif
    </div>
@@ -46,10 +76,10 @@
          <br>
          <a href="../historias/create/{{$interno->id}}" class="btn btn-success btn-sm m-0">Ingresar Datos</a>
       @else
-         Legajo: {!!$interno->legajo!!} <br>
-         Area: {{$historia->regimen->area->nombre}} <br>
-         Regimen: {{$historia->regimen->nombre}} <br>
-         Fecha de Ingreso: {{$historia->fecha_inicio}} <br>
+         Legajo: {!!isset($interno->legajo) ? $interno->legajo : 'SIN INFORMACION'!!} <br>
+         Area: {{isset($historia->regimen->area->nombre) ? $historia->regimen->area->nombre : 'SIN INFORMACION'}} <br>
+         Regimen: {{isset($historia->regimen->nombre) ? $historia->regimen->nombre : 'SIN INFORMACION'}} <br>
+         Fecha de Ingreso: {{isset($historia->fecha_inicio) ? $historia->fecha_inicio : 'SIN INFORMACION'}} <br>
          Tipo Delito:
          {{isset($historia->delito_especifico->tipo_delito->nombre) ? $historia->delito_especifico->tipo_delito->nombre : 'SIN INFORMACION'}}
          <br>
@@ -60,7 +90,7 @@
          {{isset($historia->situacion_procesal->nombre) ? $historia->situacion_procesal->nombre : 'SIN INFORMACION'}}<br>
          Frecuencia de Control:
          {{isset($historia->frecuencia->nombre) ? $historia->frecuencia->nombre : 'SIN INFORMACION'}}<br>
-         @if($historia->empleado()->first()->id==Auth::user()->empleado->id)
+         @if(Auth::user()->empleado->id==$empleado_id || in_array(Auth::user()->rol()->codigo,array(1,2)) )
             <a href="../historias/{{ $historia->id }}/edit" class="btn btn-success btn-sm">Editar</a>
          @endif
       @endif
@@ -74,7 +104,9 @@
       @empty($interno->situacion_salud->id)
       No hay datos registrados...
       <br>
-      <a href="../situacionsaluds/create/{{$interno->id}}" class="btn btn-primary btn-sm m-0">Ingresar Datos</a>
+         @if(Auth::user()->empleado->id==$empleado_id || in_array(Auth::user()->rol()->codigo,array(1,2)) )
+            <a href="../situacionsaluds/create/{{$interno->id}}" class="btn btn-primary btn-sm m-0">Ingresar Datos</a>
+         @endif
       @endempty
    </div>
 

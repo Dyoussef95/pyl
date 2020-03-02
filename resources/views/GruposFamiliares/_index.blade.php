@@ -1,6 +1,9 @@
+
 <h1>Grupo Familiar de {!!  $interno->nombre  !!} {!!  $interno->apellido  !!}</h1>
-    
-<a type="button" class="btn btn-info" href={{ route('gruposfamiliares.create', ['interno' => $interno])  }}>Agregar Nuevo</a>
+@if(Auth::user()->empleado->id==$empleado_id || in_array(Auth::user()->rol()->codigo,array(1,2)) )
+           
+   <a type="button" class="btn btn-info" href={{ route('gruposfamiliares.create', ['interno' => $interno])  }}>Agregar Nuevo</a>
+@endif   
    <br><br>
 
 <div class="table-responsive">

@@ -2,7 +2,7 @@
 
 @section('parametersContent')
     
-<button type="button" class="btn btn-info" onclick="location.href='areas/create'">Agregar Nuevo</button>
+<button type="button" class="btn btn-success" onclick="location.href='areas/create'">Agregar Nuevo</button>
 <br><br>
 <div class="table-responsive-sm">
 <table class="table table-striped" id="tabla" style="width:auto">

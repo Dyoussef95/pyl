@@ -8,7 +8,7 @@
     <select name="regimen_id" form="form" class="select2" style="width:400px;">
         @foreach ($regimenes as $regimen)
             <option value={{ $regimen->id }}
-                @if(isset($historia))
+                @if(isset($historia->regimen->id))
                     {{$historia->regimen->id==$regimen->id ? 'selected' : ''}}
                 @endif
             >
@@ -22,7 +22,7 @@
     <select name="delito_especifico_id" form="form" class="select2" style="width:400px;">
         @foreach ($delitoespecificos as $delitoespecifico)
             <option value={{ $delitoespecifico->id }}
-                @if(isset($historia))
+                @if(isset($historia->delito_especifico->id))
                     {{$historia->delito_especifico->id==$delitoespecifico->id ? 'selected' : ''}}
                 @endif
             >
@@ -36,7 +36,7 @@
     <select name="situacion_procesal_id" form="form" class="select2" style="width:400px;">
         @foreach ($situacionprocesales as $situacionprocesal)
             <option value={{ $situacionprocesal->id }}
-                @if(isset($historia))
+                @if(isset($historia->situacion_procesal->id))
                     {{$historia->situacion_procesal->id==$situacionprocesal->id ? 'selected' : ''}}
                 @endif
             >
@@ -50,7 +50,7 @@
     <select name="motivos_de_ingreso_programa_id" form="form" class="select2" style="width:400px;">
         @foreach ($motivosdeingresoalprograma as $motivodeingresoalprograma)
             <option value={{ $motivodeingresoalprograma->id }}
-                @if(isset($historia))
+                @if(isset($historia->motivo_ingreso->id))
                     {{$historia->motivo_ingreso->id==$motivodeingresoalprograma->id ? 'selected' : ''}}
                 @endif
             >
@@ -78,7 +78,7 @@
     <select name="juzgado_especifico_id" form="form" class="select2" style="width:400px;">
         @foreach ($juzgadoespecificos as $juzgadoespecifico)
             <option value={{ $juzgadoespecifico->id }}
-                @if(isset($historia))
+                @if(isset($historiajuzgadoespecifico->id))
                     {{$historia->juzgadoespecifico->id==$juzgadoespecifico->id ? 'selected' : ''}}
                 @endif
             >

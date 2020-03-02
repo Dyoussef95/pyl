@@ -28,7 +28,7 @@ class TipoDelitoController extends Controller
     public function store(Request $request)
     {
         $tipodelito = new TipoDelito;
-        $tipodelito->nombre=$request->input('nombre');
+        $tipodelito->nombre=strtoupper($request->nombre);
         $tipodelito->habilitado=true;
         $tipodelito->save();
         //TipoDelito::create($request->all());
@@ -41,7 +41,7 @@ class TipoDelitoController extends Controller
 
     public function update(TipoDelito $tipodelito)
     {
-       $tipodelito->nombre=request()->nombre;
+       $tipodelito->nombre=strtoupper(request()->nombre);
        $tipodelito->save();
        return redirect('tipodelitos');
     }

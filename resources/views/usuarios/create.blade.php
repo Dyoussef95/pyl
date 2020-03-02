@@ -4,7 +4,7 @@
     
     <div class="card-header"><legend>Crear nuevo Usuario</legend></div>
     <div class="card-body">
-        <form action="/usuarios" method="POST" role="form">          
+        <form action="/usuarios" method="POST" role="form" id="form">          
         
             @include('usuarios._form')
 

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Rol;
+use App\User;
+use App\Empleado;
 
 class PatronatoController extends Controller
 {
@@ -13,7 +17,10 @@ class PatronatoController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $usuario=Auth::user();
+        $empleado = $usuario->empleado;
+        $rol = Rol::find($usuario->rol_id);
+        return view('dashboard',compact('usuario','empleado','rol'));
     }
 
     /**

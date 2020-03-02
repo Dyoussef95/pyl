@@ -72,6 +72,9 @@
     <a class="nav-link {{Request::is('regimen') ? 'active' : ''}}" id="regimenes-tab"  href="regimen" role="tab" aria-controls="regimenes" aria-selected="false">Regimenes</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link {{Request::is('roles') ? 'active' : ''}}" id="regimenes-tab"  href="roles" role="tab" aria-controls="roles" aria-selected="false">Roles de Usuario</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link {{Request::is('situacioneslaborales') ? 'active' : ''}}" id="situacioneslaborales-tab" href="situacioneslaborales" role="tab" aria-controls="situacioneslaborales" aria-selected="true">Situaciones Laborales</a>
   </li>
   <li class="nav-item">

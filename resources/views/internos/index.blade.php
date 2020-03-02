@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.css') }}">
 @endsection
 @section('content')
-
+@if(Auth::user()->rol()->codigo==1)
 <form action="{{ route('internos.import.excel') }}" method="post" enctype="multipart/form-data">
    @csrf
    @if(Session::has('message'))
@@ -17,8 +17,7 @@
    <button class="btn btn-primary">Importar</button>
   
 </form>
-
-<button type="button" class="btn btn-primary" onclick="location.href='internos/create'">Agregar Nuevo</button>
+@endif
 
 <br><br>
 <!--<input type="text" id="myInput" onkeyup="search()" placeholder="Buscar..">
@@ -30,7 +29,7 @@
 <input type="radio" name="selection" value="4"> Trabajo
 <input type="radio" name="selection" value="5"> Legajo
 <div>Cantidad:<b id="cant"></b></div>-->
-<div class="table-responsive">
+<div class="table table-sm table-responsive">
    <table id="dataTable" name="dataTable" class="table table-hover">
       <thead class="thead-dark">
          <tr>
@@ -57,9 +56,9 @@
                <form action="/internos/{{ $interno->id}}" method="POST">
                   @method('DELETE')
                   @csrf
-                  <div class="form-group">
+                
                      <input type="hidden" name="url" class="form-control" id="" value={{URL::current()}}>
-                  </div>
+                  
                   <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                </form>
             </td>

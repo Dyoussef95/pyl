@@ -4,6 +4,9 @@ namespace App\Imports;
 
 use App\Interno;
 use App\Empleado;
+use App\Historia;
+use App\TipoDelito;
+use App\MotivoIngresoPrograma;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -26,27 +29,54 @@ class InternosImport implements ToCollection
          30:profesional a cargo*/ 
          //Date::excelToDateTimeObject($fecha)
         //$nombres = explode(', ',$row[1]);
+        $c=0;
         foreach ($rows as $row) 
         {
-            $empleados = Empleado::get();
-            foreach($empleados as $empleado){
-                $empleado->nombre .= ' '.$empleado->apellido;
-                if (isset($row[20]) && is_int($row[20]) && isset($row[30]) && $empleado->nombre==strtoupper($row[30])) {
-                
-                
-                    $nombres = explode(', ',$row[1]);//divide una cadena cada vez que encuentra el primer argumento, retorna un array
-                    Interno::create([
-                        'legajo' => $row[20],
-                        'apellido' => $nombres[0],
-                        'nombre' => $nombres[1],
-                        'fecha_nacimiento' => Date::excelToDateTimeObject($row[12]),//convierte el valor devuelto por el excel a formato datatime
-                        'numero_documento' => $row[4],
-                        'domicilioDeclarado' => $row[5],
-                    ]);
-                }
-            }
+            $c=$c+1;
+            $empleados = Empleado::get();  
+                            
             
+                if (isset($row[20]) && is_int($row[20]) && isset($row[30]))
+                //validamos que tenga legajo, que el legajo sea un numero entero y que tenga profesional a cargo
+                {
+                    $b=0;
+                    $empleado_id=null;
+                    foreach($empleados as $empleado){
+                        $empleado->nombre .= ' '.$empleado->apellido;//concatena las 2 cadenas
+                        $row[30]=trim($row[30]);//elimina espacios en blanco al principio y al final
+                        if(strcasecmp($empleado->nombre, $row[30])==0){
+                            
+                            $empleado_id=$empleado->id; 
+                            $b=1;
+                        }
+                        
+                    }
+                    
+                    if($b==1){
+                        $nombres = explode(', ',$row[1]);//divide una cadena cada vez que encuentra el primer argumento, retorna un array
+        
+                        
+                        $interno = new Interno;
+                        $interno->legajo = $row[20];
+                        $interno->apellido = strtoupper($nombres[0]);
+                        $interno->nombre = strtoupper($nombres[1]);
+                        $interno->fecha_nacimiento = Date::excelToDateTimeObject($row[12]);//convierte el valor devuelto por el excel a formato datatime
+                        $interno->numero_documento = $row[4];
+                        $interno->domicilioDeclarado = $row[5];
+                        $interno->save();
+
+                        $historia = new Historia;
+                        $historia->interno()->associate($interno); 
+                        $historia->fecha_inicio =  Date::excelToDateTimeObject($row[22]);
+                        $motivoingresoprograma = MotivoIngresoPrograma::where('nombre',strtoupper($row[26]))->first();
+                        if(isset($motivoingresoprograma)){
+                            $historia->motivo_ingreso_programa_id=$motivoingresoprograma->id;
+                        }
+                        $historia->save();
+                        $historia->empleado()->attach($empleado_id);  
+                         
+                    }                  
+                }               
         }
-      
     }
 }

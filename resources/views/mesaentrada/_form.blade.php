@@ -23,7 +23,7 @@
         @if (isset($motivoingresoprogramas))
             @foreach ($motivoingresoprogramas as $motivoingresoprograma)
                 <option value={{ $motivoingresoprograma->id }}
-                    @if(isset($historia))
+                    @if(isset($historia->motivo_ingreso))
                         {{$historia->motivo_ingreso->id==$motivoingresoprograma->id ? 'selected' : ''}}
                     @endif
                 >{{ $motivoingresoprograma->nombre }}</option>
@@ -39,7 +39,7 @@
         @if (isset($juzgadoespecificos))
             @foreach ($juzgadoespecificos as $juzgadoespecifico)
                 <option value={{ $juzgadoespecifico->id }}
-                    @isset($historia)
+                    @isset($historia->juzgadoEspecifico)
                         {{$historia->juzgadoEspecifico->id==$juzgadoespecifico->id ? 'selected' : ''}}
                     @endisset
                 >{{ $juzgadoespecifico->nombre }}</option>
@@ -54,7 +54,7 @@
         @if (isset($regimenes))
             @foreach ($regimenes as $regimen)
                 <option value={{ $regimen->id }}
-                    @isset($historia)
+                    @isset($historia->regimen)
                         {{$historia->regimen->id==$regimen->id ? 'selected' : ''}}
                     @endisset
                 >{{ $regimen->nombre }}</option>

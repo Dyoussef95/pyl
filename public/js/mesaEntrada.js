@@ -15,27 +15,50 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready( function () {  
-  $('#dataTableMesaEntrada').DataTable( {
-   language: {
-       search: "Buscar en la tabla:",
-       info: "Mostrando _TOTAL_ elementos",
-       infoEmpty: "Mostrando _TOTAL_ elementos",
-       infoFiltered: "(Filtrado de un total de _MAX_)",
-       zeroRecords: '<button id="no-results-btn" class="btn btn-info" onclick="noResultsButtonClicked()">No se encontro resultado. Click para agregar</a>',
-       lengthMenu: "Mostrar _MENU_ entradas",
-       paginate: {
-       first: "Primero",
-       last: "Ultimo",
-       next: "Siguiente",
-       previous: "Anterior"
-   },
-   }
-} );
 
-$('#dataTable').show(3000);
-} );
+
+
 
 function noResultsButtonClicked() {
     location.href='mesa-entrada/create'
   }
+
+  $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#dataTableMesaEntrada thead tr').clone(true).appendTo( '#dataTableMesaEntrada thead' );
+    $('#dataTableMesaEntrada thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Buscar por '+title+'" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+ 
+    var table = $('#dataTableMesaEntrada').DataTable( {
+        orderCellsTop: true,
+        
+        language: {
+          search: "Buscar en la tabla:",
+          info: "Mostrando _TOTAL_ elementos",
+          infoEmpty: "Mostrando _TOTAL_ elementos",
+          infoFiltered: "(Filtrado de un total de _MAX_)",
+          zeroRecords: '<button id="no-results-btn" class="btn btn-info" onclick="noResultsButtonClicked()">No se encontro resultado. Click para agregar</a>',
+          lengthMenu: "Mostrar _MENU_ entradas",
+          paginate: {
+            first: "Primero",
+            last: "Ultimo",
+            next: "Siguiente",
+            previous: "Anterior"
+          },
+      },
+      fixedHeader: true
+    } );
+} );
+
+  

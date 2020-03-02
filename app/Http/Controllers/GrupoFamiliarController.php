@@ -24,7 +24,8 @@ class GrupoFamiliarController extends Controller
     {
         $gruposFamiliares = GrupoFamiliar::get()->where('interno_id',$interno->id);
         $parentezcos = Parentezco::get();
-        return view('GruposFamiliares.index',compact('gruposFamiliares','interno','parentezcos'));
+        $empleado_id = $interno->historia()->first()->empleado()->first()->id;
+        return view('GruposFamiliares.index',compact('empleado_id','gruposFamiliares','interno','parentezcos'));
     }
 
     /**
