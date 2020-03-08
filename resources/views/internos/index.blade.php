@@ -18,17 +18,6 @@
   
 </form>
 @endif
-
-<br><br>
-<!--<input type="text" id="myInput" onkeyup="search()" placeholder="Buscar..">
-<h4>Buscar por:</h4>
-<input type="radio" name="selection" checked value="0"> Apellido
-<input type="radio" name="selection" value="1"> Nombre
-<input type="radio" name="selection" value="2"> N° Documento
-<input type="radio" name="selection" value="3"> Localidad
-<input type="radio" name="selection" value="4"> Trabajo
-<input type="radio" name="selection" value="5"> Legajo
-<div>Cantidad:<b id="cant"></b></div>-->
 <div class="table table-sm table-responsive">
    <table id="dataTable" name="dataTable" class="table table-hover">
       <thead class="thead-dark">
@@ -48,19 +37,21 @@
          class="table-primary"
          @endif
           onclick="location.href='/internos/{{$interno->id}}'" style="cursor: pointer;">
-            <td onclick="location.href='/internos/{{$interno->id}}'">{!! $interno->apellido !!}</td>
+            <td>{!! $interno->apellido !!}</td>
             <td>{!! $interno->nombre !!}</td>
             <td>{!! $interno->numero_documento !!}</td>
             <td>{!! $interno->legajo !!}</td>
             <td>
+            @if(in_array(Auth::user()->rol()->codigo,array(1,3)))
                <form action="/internos/{{ $interno->id}}" method="POST">
                   @method('DELETE')
                   @csrf
                 
-                     <input type="hidden" name="url" class="form-control" id="" value={{URL::current()}}>
+                  <input type="hidden" name="url" class="form-control" id="" value={{URL::current()}}>
                   
                   <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                </form>
+            @endif
             </td>
          </tr>
          @endforeach

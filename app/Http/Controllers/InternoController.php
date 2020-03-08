@@ -34,8 +34,9 @@ class InternoController extends Controller
     public function index()
     {
         $internos = Interno :: orderBy('apellido','desc')->get();
+        $historias = Historia::get();
         $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();        
-        return view('internos.index', compact('internos','situacionsaludenfermedads'));
+        return view('internos.index', compact('internos','situacionsaludenfermedads','historias'));
     }
 
     public function show(Interno $interno)
@@ -44,6 +45,7 @@ class InternoController extends Controller
     $situacionsaludenfermedads = SituacionSaludEnfermedad :: get();
     $gruposFamiliares = GrupoFamiliar::get()->where('interno_id',$interno->id);
     $parentezcos = Parentezco::get();
+    $tiposDocumento = TipoDocumento::get();
     /*if($gruposFamiliares->isEmpty()){
       $gruposFamiliares=null; 
     }*/
@@ -51,7 +53,11 @@ class InternoController extends Controller
     
     $edad = Carbon::parse($interno->fecha_nacimiento)->age;
    
-     return view('internos.show',compact('empleado_id','situacionsaludenfermedads','situacionsaluds','gruposFamiliares','parentezcos'))->with('interno',$interno)->with('historia',$interno->historia()->first())->with('edad',$edad);
+     return view('internos.show',compact('tiposDocumento','empleado_id','situacionsaludenfermedads',
+     'situacionsaluds','gruposFamiliares','parentezcos'))
+        ->with('interno',$interno)
+        ->with('historia',$interno->historia()->first())
+        ->with('edad',$edad);
     }
 
     public function create()
@@ -74,22 +80,21 @@ class InternoController extends Controller
 
     public function store(Request $request)
     {
-        /*$Interno = new Interno;
-        $Interno->nombre=$request->input('nombre');
-        $Interno->juzgadoTipo_id=$request->input('juzgadoTipo_id');
-        $Interno->habilitado=true;
-        $Interno->save();*/
+        $request->validate([
+            'nombre' => 'regex:/^[\pL\s\-]+$/u',
+            'apellido'=>'regex:/^[\pL\s\-]+$/u',
+        ]);
+
+        $interno = new Interno;
+        $interno->legajo = $request->legajo;
+        $interno->nombre=mb_strtoupper($request->nombre);
+        $interno->apellido=mb_strtoupper($request->apellido);
+        $interno->save();   
         
-        $request->nombre=strtoupper($request->nombre);
-        $request->apellido=strtoupper($request->apellido);
-         dd($request->all('nombre'));
-        Interno::create($request->all());
-        $interno = Interno::latest()->first();
+        $situacionSaludController = new SituacionSaludController;
+        $situacionSalud = $situacionSaludController->nuevoInterno($interno);
        
-        $situacionsalud = new SituacionSalud;
-        $situacionsalud->interno_id=$interno->id;
-        $situacionsalud->save();
-        return redirect('internos');
+        return $interno;
     }
 
     public function edit(Interno $interno){   

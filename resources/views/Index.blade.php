@@ -114,10 +114,10 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li>
-                                        <a href="/mesa-entrada">Inicio</a>
+                                        <a href="/oficios">Oficios</a>
                                     </li>
                                     <li>
-                                        <a href="#">...</a>
+                                        <a href="/mesa-entrada">Asistidos</a>
                                     </li>
                                     <li>
                                         <a href="#">...</a>

@@ -140,7 +140,6 @@ Route::get('/mesa-entrada','HistoriaController@indexMesaEntrada');
 Route::get('/mesa-entrada/create','HistoriaController@createMesaEntrada');
 Route::get('/mesa-entrada/{interno}/edit','HistoriaController@editMesaEntrada');
 Route::put('/mesa-entrada/{historia}'.'HistoriaController@update');
-Route::post('/ingreso-nuevo','HistoriaController@storeMesaEntrada');
 Route::delete('/mesa-entrada/{interno}','InternoController@destroy');
 
 Route::resource('/enfermedads','EnfermedadController');
@@ -209,6 +208,11 @@ Route::resource('roles','RolController')->parameters([
 	'roles' => 'rol'
 ]);
 
+Route::get('/oficios', 'OficioController@index');
+Route::get('/oficios/administrativo/create','OficioController@createAdministrativo');
+Route::post('/oficios/administrativo','OficioController@storeAdministrativo');
+Route::delete('/oficios/{oficio}','OficioController@destroy');
+Route::post('/ingreso-nuevo','OficioController@nuevoInterno');
 
 Route::get('/', 'PatronatoController@index');
 
@@ -236,10 +240,9 @@ Route::get('/config', function() {
 
 Route::get('/parametros','ParametersController@index');
 
-Route::get('ruben', function() {
-	return view('prueba');
+Route::get('layout', function() {
+	return view('layoutt');
 });
-
 
 Auth::routes();
 

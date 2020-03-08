@@ -12,6 +12,7 @@ use App\SituacionProcesal;
 use App\MotivoIngresoPrograma;
 use App\FrecuenciaControl;
 use App\JuzgadoEspecifico;
+use App\Oficio;
 use Carbon\Carbon;
 
 class HistoriaController extends Controller
@@ -97,6 +98,18 @@ class HistoriaController extends Controller
 
         $internos = Interno :: get();
         $historias = Historia :: get();
+        $oficios = collect();
+
+        foreach($historias as $historia){
+            $id = $historia->id;
+            $oficiosHistoria = Oficio::where('historia_id',$id)->get();
+            $oficios->put($id,$oficiosHistoria);
+            foreach($oficios->get($id) as $oficio){
+                dd($oficio);
+            }
+        }
+
+        //dd($oficios);
         return view('mesaentrada.index', compact('internos'));
     }
 
@@ -109,10 +122,10 @@ class HistoriaController extends Controller
         $hoy = $hoy->format('Y-m-d');
         
         $motivoingresoprogramas = MotivoIngresoPrograma::all();
-        $juzgadoespecificos = JuzgadoEspecifico::all();
+        $juzgados = JuzgadoEspecifico::all();
         $regimenes = Regimen::all();
         $empleados = Empleado::all();
-        return view('mesaentrada.create',compact('motivoingresoprogramas','juzgadoespecificos','regimenes','empleados'))->with('nuevoLegajo',$nuevoLegajo)->with('hoy',$hoy);
+        return view('mesaentrada.create',compact('motivoingresoprogramas','juzgados','regimenes','empleados'))->with('nuevoLegajo',$nuevoLegajo)->with('hoy',$hoy);
     }
 
     public function storeMesaEntrada(Request $request){
@@ -120,29 +133,33 @@ class HistoriaController extends Controller
         $request->validate([
             'nombre' => 'regex:/^[\pL\s\-]+$/u',
             'apellido'=>'regex:/^[\pL\s\-]+$/u',
-        ]);
-
+        ]);        
         
-        $interno = new Interno;
-        $interno->legajo = $request->legajo;
-        $interno->apellido = strtoupper($request->apellido);
-        $interno->nombre = strtoupper($request->nombre);
-        
-        $interno->save();
-        
-        /**$interno = Interno :: where('legajo',$request->legajo)->first();
-        
-        $historia->interno_id = $interno->id;**/
+        $internoController = new InternoController;
+        $interno = $internoController->store($request);
+       
         $historia = new Historia;
         $historia->fecha_inicio = $request->fecha_inicio;
-        $historia->motivo_ingreso_programa_id = $request->motivo_ingreso_programa_id;
-        $historia->juzgado_especifico_id = $request->juzgado_especifico_id;
+        $historia->juzgado_especifico_id = $request->procedencia_id;
         $historia->regimen_id = $request->regimen_id;
         $historia->interno()->associate($interno); 
         $historia->save();
         $historia->empleado()->attach($request->empleado_id);
         return redirect('mesa-entrada');
 
+    }
+
+    public function nuevoInterno(Request $request, Interno $interno){
+        
+        $historia = new Historia;
+        $historia->fecha_inicio = $request->fecha_inicio;
+        $historia->juzgado_especifico_id = $request->procedencia_id;
+        $historia->regimen_id = $request->regimen_id;
+        $historia->interno_id= $interno->id; 
+        $historia->save();
+        $historia->empleado()->attach($request->empleado_id);
+        return $historia;
+        
     }
 
     public function editMesaEntrada($historia)

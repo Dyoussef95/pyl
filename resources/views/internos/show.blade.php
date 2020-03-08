@@ -1,6 +1,6 @@
 @extends('index')
 @section('content')
-<button type="button" class="btn btn-primary" onclick="location.href='../../internos'">Volver</button>
+<button type="button" class="btn btn-warning" onclick="location.href='../../internos'">Volver</button>
 <nav>
    <div class="nav nav-tabs" id="nav-tab" role="tablist">
       <a class="nav-item nav-link {{ substr(url()->full(),-1)!='=' ? 'active' : ''}}" id="nav-datos-personales-tab" data-toggle="tab" href="#datos-personales"
@@ -28,7 +28,7 @@
                   <td class="table-secondary border border-dark">{!!$interno->apellido!!}</td>
                </tr>
                <tr>
-                  <td class="border border-dark">{!! isset($interno->tipo_documento_id) ? $interno->tipo_documento_id : 'Documento:' !!}</td>
+                  <td class="border border-dark">{!! isset($interno->tipo_documento_id) ? $tiposDocumento->find($interno->tipo_documento_id)->nombre : 'Documento:' !!}</td>
                   <td class="table-secondary border border-dark">{!! isset($interno->numero_documento) ? $interno->numero_documento : 'SIN INFORMACION' !!}</td>
                   <td class="border border-dark">Genero:</td>
                   <td class="table-secondary border border-dark">{{isset($interno->sexo) ? $interno->sexo->nombre : 'SIN INFORMACION'}} </td>
@@ -85,7 +85,8 @@
          <br>
          Delito Especifico:
          {{isset($historia->delito_especifico->nombre) ? $historia->delito_especifico->nombre : 'SIN INFORMACION'}} <br>
-         Motivo de Ingreso al Programa: {{$historia->motivo_ingreso->nombre}} <br>
+         Motivo de Ingreso al Programa: 
+         {{isset($historia->motivo_ingreso->nombre) ? $historia->motivo_ingreso->nombre : 'SIN INFORMACION' }} <br>
          Situacion Procesal:
          {{isset($historia->situacion_procesal->nombre) ? $historia->situacion_procesal->nombre : 'SIN INFORMACION'}}<br>
          Frecuencia de Control:

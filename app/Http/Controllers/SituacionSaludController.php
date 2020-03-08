@@ -47,6 +47,15 @@ class SituacionSaludController extends Controller
         return redirect($url);
     }
 
+    public function nuevoInterno(Interno $interno)
+    {
+        $situacionSalud = new SituacionSalud;
+        $situacionSalud->cobertura_medica=false;
+        $situacionSalud->interno_id=$interno->id;
+        $situacionSalud->save();
+        return $situacionSalud;
+    }
+
     public function edit(SituacionSalud $situacionsalud){
         
         $centrosSalud = CentroSalud::all();

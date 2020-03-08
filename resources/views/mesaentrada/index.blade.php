@@ -14,8 +14,7 @@
 @endsection
 
 @section('content')
-   <h1>Mesa de Entrada</h1> 
-
+   <h1><a href="./oficios" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Oficios</a> Mesa de Entrada: Asistidos</h1> 
    
     <table id="dataTableMesaEntrada" name="dataTableMesaEntrada" class="table table-hover table-fixed">
       <thead class="thead-dark">
@@ -29,7 +28,7 @@
       <tbody>
          @foreach($internos as $interno)
          <tr>
-            <td>{!! $interno->legajo !!}</td>
+            <td >{!! $interno->legajo !!}</td>
             <td>{!! $interno->apellido !!}</td>
             <td>{!! $interno->nombre !!}</td>
             <td>{!! $interno->historia()->first()->empleado()->first()->apellido !!} {!! $interno->historia()->first()->empleado()->first()->nombre !!}</td>

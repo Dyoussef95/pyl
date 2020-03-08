@@ -1,8 +1,6 @@
 <div class="form-group">
     <label for="">Descripcion</label><br />
-    <textarea style="width: 100mm; height:40mm" form="form"  name="nombre" placeholder="Ingrese una descripcion">
-{{ isset($motivosdelingresoalprograma) ? $motivosdelingresoalprograma->nombre : '' }}
-    </textarea>
+    <textarea style="width: 100mm; height:40mm" form="form"  name="nombre" placeholder="Ingrese una descripcion">{{ isset($motivosdelingresoalprograma) ? $motivosdelingresoalprograma->nombre : '' }}</textarea>
 </div>
 
 <div class="form-group">

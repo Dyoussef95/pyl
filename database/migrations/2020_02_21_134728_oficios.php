@@ -15,9 +15,8 @@ class Oficios extends Migration
     {
         Schema::create('oficios', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tipo_oficio_id')->unsigned()->nullable();
-            $table->foreign('tipo_oficio_id')->references('id')->on('tipos_oficio')->onUpdate('cascade');
-            $table->integer('historia_id')->unsigned();
+            $table->integer('tipo_oficio')->unsigned();//1 => administrativo, 2 => tecnico
+            $table->integer('historia_id')->unsigned()->nullable();
             $table->foreign('historia_id')->references('id')->on('historias')->onUpdate('cascade')->onDelete('cascade');
             $table->date('fecha')->nullable();
             $table->string('numero',10)->nullable();
