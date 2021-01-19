@@ -41,8 +41,7 @@ class CreateTableBdProyecto extends Migration
             $table->string('SituaciónProcesal');
             $table->string('FrecuenciadeControl');	
             $table->string('Profesionalacargo');	
-            $table->string('Ultimocontactoconelprofesional');	
-            $table->string('Observación');	
+            $table->string('Ultimocontactoconelprofesional');		
             $table->string('MiembrosConvivientes');	
             $table->string('MiembrosnoConvivientes');				
             $table->string('CoberturaMedica');	

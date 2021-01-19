@@ -14,8 +14,8 @@ class DelitosEspecificosTableSeeder extends Seeder
     {
         
 
-        \DB::table('delitos_especificos')->delete();
-        
+        /*\DB::table('delitos_especificos')->delete();
+        */
         
         
     }

@@ -14,6 +14,7 @@ class DeleteInternosHealtData extends Migration
     public function up()
     {
         Schema::table('internos', function (Blueprint $table) {
+            $table->dropForeign('internos_caps_id_foreign');
             $table->dropColumn(['coberturaMedica', 'caps_id', 'enfermedades','tratamiento','adicciones','tratamientoAdicciones','lugardeTratamientodeDrogas']);
         });
     }

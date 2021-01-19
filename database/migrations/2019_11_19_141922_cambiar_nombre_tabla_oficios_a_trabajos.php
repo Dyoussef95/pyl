@@ -15,8 +15,11 @@ class CambiarNombreTablaOficiosATrabajos extends Migration
     {
         Schema::rename('oficios','trabajos');
 
+        
         Schema::table('internos', function (Blueprint $table) {
+            $table->dropForeign('internos_oficio_id_foreign');
             $table->renameColumn('oficio_id','trabajo_id');
+            $table->foreign('trabajo_id')->references('id')->on('trabajos')->onDelete('cascade');
         });
 
     }
@@ -31,7 +34,9 @@ class CambiarNombreTablaOficiosATrabajos extends Migration
         Schema::rename('trabajos','oficios');
 
         Schema::table('internos', function (Blueprint $table) {
+            $table->dropForeign('internos_trabajo_id_foreign');
             $table->renameColumn('trabajo_id','oficio_id');
+            $table->foreign('oficio_id')->references('id')->on('oficios')->onDelete('cascade');
         });
     }
 }

@@ -14,6 +14,7 @@ class ModificarTablaHistorias extends Migration
     public function up()
     {
         Schema::table('historias', function (Blueprint $table) {
+            $table->dropForeign('historias_motivos_de_ingreso_programa_id_foreign');
             $table->dropColumn(['motivos_de_ingreso_programa_id']);
             $table->bigInteger('numero_oficio')->unsigned()->nullable();
             $table->string('numero_expediente',100)->nullable();

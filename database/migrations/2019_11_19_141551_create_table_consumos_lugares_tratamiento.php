@@ -17,8 +17,8 @@ class CreateTableConsumosLugaresTratamiento extends Migration
             $table->increments('id');
             $table->integer('consumo_id')->unsigned();
             $table->foreign('consumo_id')->references('id')->on('consumos')->onDelete('cascade');
-            $table->integer('lugar_tratamiento_consumo_id')->unsigned();
-            $table->foreign('lugar_tratamiento_consumo_id')->references('id')->on('lugares_tratamiento_consumo')->onDelete('cascade');
+            $table->integer('lugar_trat_cons_id')->unsigned();
+            $table->foreign('lugar_trat_cons_id')->references('id')->on('lugares_tratamiento_consumo')->onDelete('cascade');
             $table->boolean('habilitado');
             $table->timestamps();
         });
