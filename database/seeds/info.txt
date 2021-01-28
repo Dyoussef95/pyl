@@ -1,0 +1,10 @@
+regimen;
+libertad condicional
+                     con tobillera
+libertad asistida
+                  con tobillera
+arresto con plazo
+                  con tobillera
+libertad vigilada con tobillera
+
+hablar con evaristo
