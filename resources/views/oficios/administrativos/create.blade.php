@@ -4,8 +4,8 @@
 
 <a href=".." class="btn btn-warning"><i class="fas fa-arrow-left"></i> Volver</a>
     
-    <form action="/oficios/tecnico" method="POST" role="form" id='form'>
-        <legend>Ingresar nuevo oficio administrativo</legend>
+    <form action="/oficios/administrativo" method="POST" role="form" id='form'>
+        <legend>Ingresar nuevo oficio administrativoooo</legend>
         @csrf
 
         @include('oficios._form')
