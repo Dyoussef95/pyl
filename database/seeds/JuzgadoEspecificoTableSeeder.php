@@ -59,6 +59,12 @@ class JuzgadoEspecificoTableSeeder extends Seeder
                 'juzgadoTipo_id' => 1,
                 'habilitado' => true,
             ),
+            7 => 
+            array (
+                'nombre' => 'NS/NC',
+                'juzgadoTipo_id' => 1,
+                'habilitado' => true,
+            ),
         ));
         
         

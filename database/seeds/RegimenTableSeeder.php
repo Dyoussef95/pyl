@@ -32,13 +32,13 @@ class RegimenTableSeeder extends Seeder
             2 => 
             array (
                 'nombre' => 'CONDENA CONDICIONAL',
-                'area_id' => 4,
+                'area_id' => 1,
                 'habilitado' => true,
             ),
             3 => 
             array (
                 'nombre' => 'PROBATION',
-                'area_id' => 4,
+                'area_id' => 1,
                 'habilitado' => true,
             ),
             4 => 

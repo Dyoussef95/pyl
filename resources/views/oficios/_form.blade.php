@@ -33,7 +33,6 @@
                 @endif
                 </option>                
             @endforeach
-            <option value=0 {{ empty($oficio) ? 'selected' : '' }} >NS/NC</option>
         @endif
     </select>
 </div>

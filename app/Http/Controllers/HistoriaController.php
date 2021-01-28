@@ -105,7 +105,7 @@ class HistoriaController extends Controller
             $oficiosHistoria = Oficio::where('historia_id',$id)->get();
             $oficios->put($id,$oficiosHistoria);
             foreach($oficios->get($id) as $oficio){
-                dd($oficio);
+                
             }
         }
 

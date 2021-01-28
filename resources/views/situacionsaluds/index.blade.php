@@ -1,7 +1,8 @@
 
    
-   
+   @if(Auth::user()->empleado->id==$empleado_id || in_array(Auth::user()->rol()->codigo,array(1,2)) )
    <a href="../../situacionsaluds/{{ $situacionsalud->id }}/edit" class="btn btn-success btn-sm">Editar</a><br> 
+   @endif
    <label for="">Tiene cobertura medica?: </label> 
        
    <span class="label label-success">
