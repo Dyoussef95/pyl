@@ -8,3 +8,7 @@ arresto con plazo
 libertad vigilada con tobillera
 
 hablar con evaristo
+agregar busqueda por dni
+agregar fecha de emision del officio (dato opcional)
+notas de informes
+agregar nuevos oficios al mismo interno
