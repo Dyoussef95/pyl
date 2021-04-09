@@ -27,7 +27,7 @@
       </thead>
       <tbody>
          @foreach($internos as $interno)
-         <tr>
+         <tr onclick="location.href='/oficios/tecnico/{{$interno->historia()->first()->id}}'" style="cursor: pointer;">
             <td >{!! $interno->legajo !!}</td>
             <td>{!! $interno->apellido !!}</td>
             <td>{!! $interno->nombre !!}</td>

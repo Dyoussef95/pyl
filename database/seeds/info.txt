@@ -1,8 +1,8 @@
 hablar con evaristo
-agregar busqueda por dni
-agregar fecha de emision del officio (dato opcional)
+agregar busqueda por dni 
+agregar fecha de emision del officio (dato opcional) ---> ok
 notas de informes
-agregar nuevos oficios al mismo interno
+agregar nuevos oficios al mismo  --->> en proceso
 agregar opción sin intervenciòn profesional
 
 corregir error, al borrar los regimenes se borran los oficios y los internos quedan sin oficio.

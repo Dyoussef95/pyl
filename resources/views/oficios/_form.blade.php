@@ -8,7 +8,7 @@
 
 <div class="form-group">
     <div class="input-group-prepend">
-        <span class="input-group-text">Fecha</span>
+        <span class="input-group-text">Fecha del Oficio</span>
     </div>
     <input type="date" name="fecha" value="{{ isset($oficio) ? $oficio->fecha : '' }}" class="form-control" id="" placeholder="Ingrese la fecha">
 </div>

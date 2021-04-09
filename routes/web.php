@@ -213,6 +213,7 @@ Route::get('/oficios/administrativo/create','OficioController@createAdministrati
 Route::post('/oficios/administrativo','OficioController@storeAdministrativo');
 Route::delete('/oficios/{oficio}','OficioController@destroy');
 Route::post('/ingreso-nuevo','OficioController@nuevoInterno');
+Route::get('/oficios/tecnico/{historia}','OficioController@oficiosHistoria');
 
 Route::get('/', 'PatronatoController@index');
 

@@ -59,6 +59,10 @@ class OficioController extends Controller
         return redirect($request->url);
     }
 
+    public function oficiosHistoria(Historia $historia){
+        return view('oficios.tecnicos.index');
+    }
+
     public function storeTecnico(Request $request)
     {
         $oficio = new Oficio;
