@@ -3,33 +3,35 @@
 @section('content')
 
 
-<h1>OFICIOS DE </h1>
+<h1><a href="javascript:history.back()" class="btn btn-warning"><i class="fas fa-arrow-left"></i> Asistidos</a> OFICIOS DE {{$historia->interno->nombre}}</h1>
 
 
 
-<button type="button" class="btn btn-primary" onclick="location.href='usuarios/create'">Agregar Nuevo</button>
+<button type="button" class="btn btn-primary" onclick="location.href='{{$historia->id}}/create'">Agregar Nuevo</button>
 <br><br>
 <div class="table-responsive">
    <table class="table table-striped" id="tabla" style="width:auto">
       <thead class="thead-dark">
          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Usuario</th>
-            <th>Rol</th>
-            <th scope="col">Email</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+         <th>Fecha</th>
+                        <th>Numero</th>
+                        <th>Descripcion</th>
+                        <th>Procedencia</th>
+                        <th></th>
+                        <th></th>
          </tr>
       </thead>
       <tbody>
-        <!-- foreach($empleados as $empleado)-->
+        @foreach($historia->oficios as $oficio)
          <tr>
-            <td> $empleado->nombre </td>
-            <td> $empleado->apellido </td>
-            <td> $usuarios->find($empleado->user_id)->name </td>
-            <td> $roles->find($usuarios->find($empleado->user->id)->rol_id)->nombre </td>
-            <td> $usuarios->find($empleado->user_id)->email </td>
+         <td>{!! $oficio->fecha !!}</td>
+                        <td>{!! $oficio->numero !!}</td>
+                        <td>{!! $oficio->descripcion !!}</td>
+                        <td>
+                           @isset($oficio->procedencia_id)
+                              {!! $juzgados->find($oficio->procedencia_id)->nombre !!}
+                           @endisset
+                        </td>
             
             <td>
                <a href="usuarios/ $empleado->user_id /edit" class="btn btn-success btn-sm">Editar</a>
@@ -42,7 +44,7 @@
                </form>
             </td>
          </tr>
-         <!-- endforeach-->
+         @endforeach
       </tbody>
    </table>
 </div>

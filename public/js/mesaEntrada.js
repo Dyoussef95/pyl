@@ -25,10 +25,9 @@ function noResultsButtonClicked() {
 
 $(document).ready(function () {
   // Setup - add a text input to each footer cell
-  $('#dataTableMesaEntrada thead tr').clone(true).appendTo('#dataTableMesaEntrada thead');
+
   $('#dataTableMesaEntrada thead tr:eq(1) th').each(function (i) {
-    var title = $(this).text();
-    $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+  
 
     $('input', this).on('keyup change', function () {
       if (table.column(i).search() !== this.value) {
@@ -40,9 +39,7 @@ $(document).ready(function () {
     });
   });
 
-  var table = $('#dataTableMesaEntrada').DataTable({
-
-    
+  var table = $('#dataTableMesaEntrada').DataTable({    
 
     orderCellsTop: true,
 
@@ -67,16 +64,7 @@ $(document).ready(function () {
     this.child( 'Row details for row: '+this.index() );
   } );
  
-  $('#dataTableMesaEntrada tbody').on( 'click', 'tr', function () {
-      var child = table.row( this ).child;
-  
-      if ( child.isShown() ) {
-          child.hide();
-      }
-      else {
-          child.show();
-      }
-  } );
+
 
 
 

@@ -1,8 +1,8 @@
 hablar con evaristo
-agregar busqueda por dni 
+agregar busqueda por dni -->> no se debe buscar por dni, porque no siempre se tiene el dni y si no se encuentra se creara un ingreso nuevo, lo que puede generar duplicados
 agregar fecha de emision del officio (dato opcional) ---> ok
 notas de informes
-agregar nuevos oficios al mismo  --->> en proceso
+agregar nuevos oficios al mismo  --->> ok
 agregar opción sin intervenciòn profesional
 
 corregir error, al borrar los regimenes se borran los oficios y los internos quedan sin oficio.

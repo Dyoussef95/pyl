@@ -39,12 +39,7 @@ class OficioController extends Controller
         return view('oficios.administrativos.create')->with('juzgados',$juzgados);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function storeAdministrativo(Request $request)
     {
         $oficio = new Oficio;
@@ -59,24 +54,50 @@ class OficioController extends Controller
         return redirect($request->url);
     }
 
-    public function oficiosHistoria(Historia $historia){
-        return view('oficios.tecnicos.index');
+   
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function oficiosHistoria(Historia $historia)
+    {
+
+        //dd($historia->oficios);
+        $juzgados = JuzgadoEspecifico::get();
+        return view('oficios.tecnicos.index', compact('historia','juzgados'));
     }
+
+    public function createTecnico(Historia $historia)
+    {
+        //dd($historia->oficios);
+        $juzgados = JuzgadoEspecifico::get();
+        return view('oficios.tecnicos.create',compact('historia','juzgados'));
+    }
+
 
     public function storeTecnico(Request $request)
     {
+        //dd($request);
         $oficio = new Oficio;
         $oficio->numero = $request->numero;
         $oficio->fecha = $request->fecha;
         $oficio->descripcion = $request->descripcion;
         if($request->procedencia_id!=0){
             $oficio->procedencia_id = $request->procedencia_id;   
-        }        
+        }    
+        $oficio->historia_id = $request->historia_id;   
         $oficio->tipo_oficio = 2; //1 => administrativo, 2 => tecnico, 3 => ingreso nuevo
         $oficio->save();
 
-        return $oficio->id;
+        return redirect($request->url);
     }
+
+
+    
 
     public function nuevoInterno(Request $request){
        

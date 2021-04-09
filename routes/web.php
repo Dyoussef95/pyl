@@ -214,6 +214,8 @@ Route::post('/oficios/administrativo','OficioController@storeAdministrativo');
 Route::delete('/oficios/{oficio}','OficioController@destroy');
 Route::post('/ingreso-nuevo','OficioController@nuevoInterno');
 Route::get('/oficios/tecnico/{historia}','OficioController@oficiosHistoria');
+Route::get('/oficios/tecnico/{historia}/create','OficioController@createTecnico');
+Route::post('/oficios/tecnico','OficioController@storeTecnico');
 
 Route::get('/', 'PatronatoController@index');
 

@@ -68,6 +68,12 @@ private $rules = [
     {
         return $this->hasMany('Modules\Proyecto\Entities\OrganizacionHistoria', 'historias_id');
     }
+    
+    public function oficios()
+    {
+        return $this->hasMany('App\Oficio','historia_id');
+    }
+
     public function cumplimiento()
     {
         return $this->hasOne('App\Cumplimiento', 'historia_id');

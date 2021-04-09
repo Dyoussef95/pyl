@@ -24,4 +24,9 @@ class Oficio extends Model
         'nombre' => 'required',
         'habilitado' => 'required',
     ];
+
+    public function historia()
+    {
+        return $this->belongsTo('App\Historia', 'historia_id');
+    }
 }
