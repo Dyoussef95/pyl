@@ -20,14 +20,14 @@ class UsersTableSeeder extends Seeder
                 'habilitado' => true,
                 'rol_id' => 1,
             ),
-            1 => 
+           /* 1 => 
             array (
                 'name' => 'mferreyra',
                 'email' => 'mferreyra@gmail.com',
                 'password' => Hash::make('123456'),
                 'habilitado' => true,
                 'rol_id' => 3,
-            ), 
+            ), */
             
         ));
 

@@ -24,13 +24,13 @@ class EmpleadosTableSeeder extends Seeder
                 'user_id' => 1,
                 'apellido' => 'YOUSSEF',
             ),
-            1 => 
+            /*1 => 
             array (
                 'nombre' => 'MELISA',
                 'habilitado' => true,
                 'user_id' => 2,
                 'apellido' => 'FERREYRA',
-            ),/*192.168.100.51            
+            ),192.168.100.51            
             1 => 
             array (
                 'nombre' => 'GABRIELA',
