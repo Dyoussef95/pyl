@@ -52,9 +52,24 @@
                         <img class="img-responsive img-rounded" src="../../img/user.jpg" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name"><strong>{{ Auth::user()->empleado->nombre }}</strong><strong> {{ Auth::user()->empleado->apellido }}</strong>
+                        <span class="user-name"><strong>
+                            @isset(Auth::user()->empleado->nombre )
+                                {{Auth::user()->empleado->nombre }}
+                            @endisset
+                            
+                        </strong><strong> 
+                            @isset(Auth::user()->empleado->apellido)
+                               {{ Auth::user()->empleado->apellido }}
+                            @endisset
+                             
+                        </strong>
                         </span>
-                    <span class="user-role">{{ Auth::user()->rol()->nombre }}</span>
+                    <span class="user-role">
+                        @isset(Auth::user()->rol()->nombre)
+                            {{Auth::user()->rol()->nombre }}
+                        @endisset
+                        
+                    </span>
                         <span class="user-status">
                             <i class="fa fa-circle"></i>
                             <span>Online</span>
@@ -80,6 +95,9 @@
                         <li class="header-menu">
                             <span>CATEGORIAS</span>
                         </li>
+                        @isset(Auth::user()->rol()->codigo)
+                           
+                       
                         @if(Auth::user()->rol()->codigo == 1)
                         <li class="sidebar-dropdown">
                             <a href="#">
@@ -204,6 +222,7 @@
                             </div>
                         </li>
                         @endif
+                        @endisset
                         <!--<li class="header-menu">
                             <span>Extra</span>
                         </li>

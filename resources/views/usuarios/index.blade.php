@@ -25,12 +25,18 @@
       <tbody>
          @foreach($empleados as $empleado)
          <tr>
+         @isset($empleado->nombre) 
+        
             <td>{!! $empleado->nombre !!}</td>
             <td>{!! $empleado->apellido !!}</td>
             <td>{!! $usuarios->find($empleado->user_id)->name !!}</td>
-            <td>{!! $roles->find($usuarios->find($empleado->user->id)->rol_id)->nombre !!}</td>
+            <td>
+               @isset($roles->find($usuarios->find($empleado->user->id)->rol_id)->nombre)  
+                  {{ $roles->find($usuarios->find($empleado->user->id)->rol_id)->nombre }} 
+               @endisset
+            </td>
             <td>{!! $usuarios->find($empleado->user_id)->email !!}</td>
-            
+          
             <td>
                <a href="usuarios/{{ $empleado->user_id }}/edit" class="btn btn-success btn-sm">Editar</a>
             </td>
@@ -42,6 +48,7 @@
                </form>
             </td>
          </tr>
+           @endisset
          @endforeach
       </tbody>
    </table>
